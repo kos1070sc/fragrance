@@ -29,7 +29,7 @@ def edp():
     return render_template('fragrance_info.html', name = fragrance_name, brand = fragrance_brand, description = fragrance_desc) #display info with templates
 
 
-    
+ 
 
 if __name__ == "__main__":
     app.run(debug=True)
