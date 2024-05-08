@@ -11,13 +11,22 @@ def home():
 def about():
     return "This is the about page"
 
+
+#Route for EDP Page 
 @app.route("/EDP")
 def edp():
-    connection = sqlite3.connect('fragrance.db')
+    connection = sqlite3.connect('fragrance.db') #connect to database 
     cur = connection.cursor()
-    cur.execute("SELECT bottle_name, bottle_description, bottle_concentration FROM Fragrance WHERE bottle_concentration = 'EDP'")
-    fragrance_edp = cur.fetchall()
-    return render_template('pizza.html', fragrance_edp = fragrance_edp)
+    cur.execute("SELECT bottle_name FROM Fragrance WHERE bottle_concentration = 'EDP'") #select bottle name
+    fragrance_name = cur.fetchall()
+
+    cur.execute("SELECT brand_name from Fragrance INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id WHERE bottle_concentration = 'EDP'")
+    fragrance_brand = cur.fetchall() #select bottle brand
+
+    cur.execute("SELECT bottle_description FROM Fragrance WHERE bottle_concentration = 'EDP'")
+    fragrance_desc = cur.fetchall() #select bottle description
+
+    return render_template('fragrance_info.html', name = fragrance_name, brand = fragrance_brand, description = fragrance_desc) #display info with templates
 
 
     
