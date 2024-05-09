@@ -1,0 +1,14 @@
+#navbar{
+    background-color:grey;
+    font-size: 20px;
+    text-align: center;
+}
+
+.link{
+    color:cyan; 
+    padding-left: 100px;
+}
+
+.header{
+    text-align: center;
+}

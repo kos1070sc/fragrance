@@ -2,20 +2,34 @@
 {%extends 'layout.html'%}
 
 {%block content%}
-<h2>EDP Fragrances</h2>
+<h2>{{concentration[0]}} Fragrances</h2>
 <hr/>
 
-<h3>1. {{name[1]}}</h3>
-<h4>{{brand[1]}}</h4>
+<h3>1. {{name[0]}}</h3>
+<h4>Brand: {{brand[0]}}</h4>
+<p>{{description[0]}}</p>
+
+<h3>2. {{name[1]}}</h3>
+<h4>Brand: {{brand[1]}}</h4>
 <p>{{description[1]}}</p>
 
-<h3>2. {{name[2]}}</h3>
-<h4>{{brand[2]}}</h4>
+<h3>3. {{name[2]}}</h3>
+<h4>Brand: {{brand[2]}}</h4>
 <p>{{description[2]}}</p>
 
-<h3>3. {{name[3]}}</h3>
-<h4>{{brand[3]}}</h4>
+<h3>4. {{name[3]}}</h3>
+<h4>Brand: {{brand[3]}}</h4>
 <p>{{description[3]}}</p>
+
+<h3>5. {{name[4]}}</h3>
+<h4>Brand: {{brand[4]}}</h4>
+<p>{{description[4]}}</p>
+
+<h3>6. {{name[5]}}</h3>
+<h4>Brand: {{brand[5]}}</h4>
+<p>{{description[5]}}</p>
+
+
 
 
 {%endblock%}
