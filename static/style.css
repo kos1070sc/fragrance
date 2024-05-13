@@ -12,3 +12,37 @@
 .header{
     text-align: center;
 }
+
+.content{
+    padding-left: calc(25% - 20px);
+    padding-right: calc(25% - 20px);
+}
+
+
+
+
+
+
+.introduction_container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .introduction_image {
+    flex: 1;
+  }
+  
+  .introduction_text {
+    flex: 2;
+    padding: 20px;
+  }
+  
+  .introduction_image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .hero_image{
+    width: 100%;
+    height: auto;
+  }
