@@ -1,7 +1,11 @@
+
+/* layout.html */
+
 #navbar{
     background-color:grey;
-    font-size: 20px;
+    height: auto;
     text-align: center;
+    font-size: 25px;
 }
 
 .link{
@@ -18,9 +22,24 @@
     padding-right: calc(25% - 20px);
 }
 
+.footer{
+  background-color: grey;
+  height: 50px;
+}
+
+.footer p{
+  color: cyan;
+  padding-left: calc(25% - 20px);
+  padding-right: calc(25% - 20px);
+  text-align: center;
+}
 
 
 
+
+
+
+/* home.hmtl */
 
 
 .introduction_container {
@@ -46,3 +65,17 @@
     width: 100%;
     height: auto;
   }
+
+
+
+
+
+
+
+
+
+/* fragrance_info.html*/
+
+.fragrance_info_container{
+  padding: 75px;
+}

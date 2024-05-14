@@ -3,16 +3,20 @@ import sqlite3
 
 app = Flask(__name__)
 
+
+
+
+#
+#Route for homepage
+#
 @app.route("/")
 def home():
     return render_template("home.html")
 
-@app.route("/about")
-def about():
-    return "This is the about page"
 
-
-#Route for EDP page 
+#
+#Route for EDP page
+#  
 @app.route("/EDP")
 def edp():
     connection = sqlite3.connect('fragrance.db') #connect to database 
@@ -34,8 +38,9 @@ def edp():
 
 
 
-
+#
 #Route for EDT page
+#
 @app.route("/EDT")
 def edt():
     connection = sqlite3.connect('fragrance.db') #connect to database 
@@ -55,7 +60,18 @@ def edt():
     return render_template('fragrance_info.html', concentration = fragrance_concentration, name = fragrance_name, brand = fragrance_brand, description = fragrance_desc) #display info with templates
 
 
- 
+
+#
+#Route for comparision page
+#
+@app.route("/comparision")
+def comparision():
+        connection = sqlite3.connect('fragrance.db') #connect to database 
+        cur = connection.cursor()
+        cur.execute("SELECT * FROM Fragrance")
+        result = cur.fetchall()
+        return render_template('comparision.html', info = result)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
