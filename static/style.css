@@ -47,26 +47,38 @@
     align-items: center;
   }
   
-  .introduction_image {
-    flex: 1;
-  }
-  
-  .introduction_text {
-    flex: 2;
-    padding: 20px;
-  }
-  
-  .introduction_image img {
-    max-width: 100%;
-    height: auto;
-  }
+.introduction_image {
+  flex: 1;
+}
 
-  .hero_image{
-    width: 100%;
-    height: auto;
-  }
+.introduction_text {
+  flex: 2;
+  padding: 20px;
+}
+
+.introduction_image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.hero_image{
+  width: 100%;
+  height: auto;
+}
 
 
+.featured_brands_container{
+  padding: 30px;
+  text-align: center;
+}
+
+.featured_brands_container h4{
+  font-size: 30px;
+}
+
+.featured_brands_container h3{
+  font-size: 40px;
+}
 
 
 
