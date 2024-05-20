@@ -27,7 +27,7 @@ def edp():
     cur = connection.cursor()
 
     cur.execute("SELECT bottle_concentration FROM Fragrance where bottle_concentration = 'EDP';")
-    fragrance_concentration = cur.fetchall()
+    fragrance_concentration = cur.fetchone()
 
     cur.execute("SELECT bottle_name FROM Fragrance WHERE bottle_concentration = 'EDP';") #select bottle name
     fragrance_name = cur.fetchall()
@@ -38,11 +38,11 @@ def edp():
     cur.execute("SELECT bottle_description FROM Fragrance WHERE bottle_concentration = 'EDP';")
     fragrance_desc = cur.fetchall() #select bottle description
 
-    cur.execute("SELECT bottle_name, note_name FROM Notebridge INNER JOIN Note ON NoteBridge.nid = Note.note_id INNER JOIN Fragrance ON NoteBridge.fid = Fragrance.bottle_id WHERE botte_concentration = 'EDP';")
+    cur.execute("SELECT bottle_name, note_name FROM Notebridge INNER JOIN Note ON NoteBridge.nid = Note.note_id INNER JOIN Fragrance ON NoteBridge.fid = Fragrance.bottle_id WHERE bottle_concentration = 'EDP';")
     fragrance_note = cur.fetchall()
 
 
-    return render_template('edp_info.html', concentration = fragrance_concentration, 
+    return render_template('edp.html', concentration = fragrance_concentration, 
     name = fragrance_name, brand = fragrance_brand, description = fragrance_desc, note = fragrance_note) 
     #display info with templates
 
@@ -59,7 +59,7 @@ def edt():
     fragrance_name = cur.fetchall()
 
     cur.execute("SELECT bottle_concentration FROM Fragrance where bottle_concentration = 'EDT';")
-    fragrance_concentration = cur.fetchall()
+    fragrance_concentration = cur.fetchone()
 
     cur.execute("SELECT brand_name from Fragrance INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id WHERE bottle_concentration = 'EDT';")
     fragrance_brand = cur.fetchall() #select bottle brand
@@ -70,9 +70,28 @@ def edt():
     cur.execute("SELECT bottle_name, note_name FROM Notebridge INNER JOIN Note ON NoteBridge.nid = Note.note_id INNER JOIN Fragrance ON NoteBridge.fid = Fragrance.bottle_id WHERE bottle_concentration = 'EDT';")
     fragrance_note = cur.fetchall()
 
+    connection.close()
+
     
-    return render_template('edt_info.html', concentration = fragrance_concentration, 
+    return render_template('edt.html', concentration = fragrance_concentration, 
     name = fragrance_name, brand = fragrance_brand, description = fragrance_desc, note = fragrance_note) 
+
+
+
+
+#
+#Route for bottle information 
+#
+@app.route("/fragrance/<int:id>")
+def bottle(id):
+    connection = sqlite3.connect('fragrance.db') #connect to database 
+    cur = connection.cursor()
+    cur.execute("SELECT bottle_name, note_name FROM Notebridge INNER JOIN Note ON NoteBridge.nid = Note.note_id INNER JOIN Fragrance ON NoteBridge.fid = Fragrance.bottle_id WHERE bottle_id = ?", (id,))
+    fragrance_note = cur.fetchall()
+    return render_template("bottle_info.html", note = fragrance_note)
+
+
+
 
 #
 #Route for comparision page
