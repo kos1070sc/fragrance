@@ -51,7 +51,8 @@ def edp():
 
 
     return render_template('edp.html', concentration = fragrance_concentration, 
-    name = fragrance_name, brand = fragrance_brand, description = fragrance_desc, note = fragrance_note) 
+    name = fragrance_name, brand = fragrance_brand, description = fragrance_desc, 
+    note = fragrance_note) 
     #display info with templates
 
 
@@ -90,7 +91,8 @@ def edt():
 
     
     return render_template('edt.html', concentration = fragrance_concentration, 
-    name = fragrance_name, brand = fragrance_brand, description = fragrance_desc, note = fragrance_note) 
+    name = fragrance_name, brand = fragrance_brand, description = fragrance_desc, 
+    note = fragrance_note) 
 
 
 
@@ -140,12 +142,24 @@ def comparision():
         return render_template('comparision.html', info = result)
 
 
-@app.route('/triangles/<int:size>')
-def triangles(size):
+@app.route('/triangle/<int:size>')
+def triangle(size):
     triangle = ""
     for i in range(1, size + 1):
         triangle += '*' * i + '<br>'
     return f"<html><body><pre>{triangle}</pre></body></html>"
+
+
+def reverse_triangle(size):
+    for i in range(size, 0, -1):
+        print('*' * i)
+
+
+
+
+
+
+
 
 
 
