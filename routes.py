@@ -15,6 +15,7 @@ def home():
     cur = connection.cursor()
     cur.execute("SELECT brand_name FROM Designer;")
     result = cur.fetchall()
+    connection.close()
     return render_template("home.html", featured_brand = result)
 
 
@@ -48,6 +49,7 @@ def edp():
                 INNER JOIN Fragrance ON NoteBridge.fid = Fragrance.bottle_id 
                 WHERE bottle_concentration = 'EDP';''')
     fragrance_note = cur.fetchall()
+    connection.close()
 
 
     return render_template('edp.html', concentration = fragrance_concentration, 
@@ -124,7 +126,8 @@ def bottle(id):
                 ON NoteBridge.fid = Fragrance.bottle_id WHERE bottle_id = ?''', (id,))
 
     fragrance_note = cur.fetchall()
-    return render_template("bottle_info.html", note = fragrance_note, 
+    connection.close()
+    return render_template("bottle_info.html", notes = fragrance_note, 
                             brand = fragrance_brand, info = fragrance_info)
 
 
@@ -139,6 +142,7 @@ def comparision():
         cur = connection.cursor()
         cur.execute("SELECT * FROM Fragrance;")
         result = cur.fetchall()
+        connection.close()
         return render_template('comparision.html', info = result)
 
 
