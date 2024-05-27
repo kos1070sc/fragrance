@@ -1,29 +1,22 @@
 
-{% extends 'layout.html' %}
+{%extends 'layout.html'%}
 
-{% block content %}
-<div class="container">
-    <h1>{{ info[0] }}</h1> <!-- Fragrance Name -->
+{%block content%}
 
-    <h3>Brand</h3>
-    <p>{{ brand[0] }}</p> <!-- Fragrance Brand -->
+<p>{{info[0]}}</p>
+<p>{{brand[0]}}</p>
+<p>{{info[1]}}</p>
+<p>{{info[2]}}</p>
+<p>{{info[3]}}</p>
+<p>{{info[4]}}</p>
+<p>{{info[5]}}</p>
 
-    <h3>Description</h3>
-    <p>{{ info[1] }}</p> <!-- Description -->
+<br>
+<h3>Notes</h3>
+<ul>
+    {% for note in notes %}
+        <li>{{ note[1] }}</li> <!-- Notes -->
+    {% endfor %}
 
-    <h3>Details</h3>
-    <ul>
-        <li><strong>Concentration:</strong> {{ info[2] }}</li> <!-- Concentration -->
-        <li><strong>Longevity:</strong> {{ info[3] }}</li> <!-- Longevity -->
-        <li><strong>Size:</strong> {{ info[4] }} ml</li> <!-- Size -->
-        <li><strong>Price:</strong> ${{ info[5] }}</li> <!-- Price -->
-    </ul>
 
-    <h3>Notes</h3>
-    <ul>
-        {% for note in notes %}
-            <li>{{ note[1] }}</li> <!-- Notes -->
-        {% endfor %}
-    </ul>
-</div>
-{% endblock %}
+{%endblock%}
