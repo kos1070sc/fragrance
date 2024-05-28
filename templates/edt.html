@@ -6,7 +6,10 @@
 <hr/>
 
     {% for fragrance in fragrances %}
-    <li>{{ fragrance[1] }}</li> <!-- Notes -->
+    
+    <li><a ref = "/fragrance/{{fragrance[0]}}">{{ fragrance[0] }}</a> </li> <!-- Brands -->
+    
+    
     {% endfor %}
 
 

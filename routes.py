@@ -66,16 +66,17 @@ def edp():
 def edt():
     connection = sqlite3.connect('fragrance.db') #connect to database 
     cur = connection.cursor()
-    cur.execute('''SELECT bottle_name, brand_name FROM Fragrance 
+    cur.execute('''SELECT bottle_name FROM Fragrance 
                 INNER JOIN Designer 
-                ON Fragrance.bottle_brand = Designer.brand_name 
+                ON Fragrance.bottle_brand = Designer.brand_id 
                 WHERE bottle_concentration = 'EDT';''')
     fragrance_result = cur.fetchall()
 
     cur.execute('''SELECT bottle_concentration 
                 FROM Fragrance WHERE bottle_concentration = 'EDT';''')
-    fragrance_concetration = cur.fetchone()
-    return render_template("edt.html", fragrances = fragrance_result, concentration = fragrance_concentration)
+    fragrance_concentration = cur.fetchone()
+    return render_template("edt.html", fragrances = fragrance_result, 
+                            concentration = fragrance_concentration)
 
 
 
