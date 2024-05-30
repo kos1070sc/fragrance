@@ -1,7 +1,7 @@
 {%extends "layout.html"%}
 {%block content%}
 
-<h2>Homepage</h2>
+<h1>Homepage</h1>
 <hr>
 
 <img src="static/images/hero.png" alt="Hero Image" class = "hero_image">
@@ -40,52 +40,16 @@
 
 <div class = "featured_brands_container">
     <h3>Feature Brands</h3>
+    <hr>
 </div>
 
-<hr>
-
+{% for brand in brands %}
 <div class = "featured_brands_container">
-    <h4>1. {{featured_brand[0]}}</h4>
+    <h4>{{ brand[0] }}</h4>
 </div>
 
 
-
-
-<div class = "featured_brands_container">
-    <h4>2. {{featured_brand[1]}}</h4>
-</div>
-
-
-
-
-
-<div class = "featured_brands_container">
-    <h4>3. {{featured_brand[2]}}</h4>
-</div>
-
-
-
-
-<div class = "featured_brands_container">
-    <h4>4. {{featured_brand[3]}}</h4>
-</div>
-
-
-
-
-
-<div class = "featured_brands_container">
-    <h4>5. {{featured_brand[4]}}</h4>
-</div>
-
-
-
-<div class = "featured_brands_container">
-    <h4>6. {{featured_brand[5]}}</h4>
-</div>
-
-
-
-
+{% endfor %}
 
 {%endblock%}
+

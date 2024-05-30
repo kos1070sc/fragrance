@@ -1,0 +1,24 @@
+
+{%extends 'layout.html'%}
+
+{%block content%}
+<h1>{{concentration[0]}} Fragrances</h1>
+<hr/>
+
+    {% for fragrance in fragrances %} 
+    <!-- Lists out all of the edt fragrances -->
+    <h3>{{ fragrance[1] }}</h3>
+    <!-- Link for more info -->
+    <a href = "http://127.0.0.1:5000/fragrance/{{fragrance[0]}}">
+        More Info<br><br>
+    </a> 
+
+    
+
+    
+    {% endfor %}
+
+
+
+
+{%endblock%}
