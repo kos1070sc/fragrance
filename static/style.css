@@ -91,3 +91,23 @@
 .fragrance_info_container{
   padding: 75px;
 }
+
+
+
+
+
+
+/* comparision.html */
+.comparision_container{
+  display: flex;
+  align-items: center;
+}
+
+.edt_container{
+  flex: 2;
+}
+
+.edp_container{
+  flex: 1;
+  padding: 50px;
+}

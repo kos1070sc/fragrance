@@ -105,10 +105,20 @@ def bottle(id):
 def comparision():
         connection = sqlite3.connect('fragrance.db') #connect to database 
         cur = connection.cursor()
-        cur.execute("SELECT * FROM Fragrance;")
-        result = cur.fetchall()
+        cur.execute('''SELECT bottle_name, brand_name, 
+                bottle_longevity, bottle_size, bottle_price
+                FROM Fragrance INNER JOIN Designer ON 
+                Fragrance.bottle_brand = Designer.brand_id 
+                WHERE bottle_concentration = 'EDT';''')
+                
+        edt_result = cur.fetchall()
+        
+        cur.execute("SELECT * FROM Fragrance WHERE bottle_concentration = 'EDP';")
+        edp_result = cur.fetchall()
         connection.close()
-        return render_template('comparision.html', info = result)
+
+
+        return render_template('comparision.html', edt_comparision = edt_result, edp_conparision = edp_result)
 
 
 

@@ -2,18 +2,42 @@
 
 {%block content%}
 
-<h>
+<h1>
     This is the comparision page
-</h>
+</h1>
 
-<div>
-    <div>
-        <p>edt fragrances go in here</p>
+<div class = "comparision_container">
+    <div class = "edt_container">
+        <p>edt fragrances go in here...blah blah blah</p>
+        <br>
+        {% for edt in edt_comparision %} <!-- edt info for comparision -->
+        <h3>{{ edt[0] }}</h3>
+
+        <p>
+            <strong>Brand: </strong>{{ edt[1] }}
+        </p>
+
+        <p>
+            <strong>Longevity: </strong>{{ edt[2] }}
+        </p>
+
+        <p>
+            <strong>Bottle size: </strong>{{ edt[3] }}
+        </p>
+
+        <p>
+            <strong>Price: </strong>{{ edt[4] }} NZD
+        </p> 
+
+        <br>
+        <hr>
+        <br>
+        {% endfor %}
     </div>
     
     
-    <div>
-        <p>edp fragrances go in here</p>
+    <div class = "edp_container">
+        <p>edp fragrances go in here...blah blah blah</p>
     </div>
     
 </div>
@@ -24,10 +48,6 @@
 
 
 
-
-<p>
-    {{info[0]}}
-</p>
 
 
 
