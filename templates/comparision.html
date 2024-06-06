@@ -2,56 +2,55 @@
 
 {%block content%}
 
-<h1>
-    This is the comparision page
+<h1 class = "page_title">
+    Comparision page 
 </h1>
+<hr>
 
 <div class = "comparision_container">
     <div class = "edt_container">
-        <p>edt fragrances go in here...blah blah blah</p>
+        <h2>EDT Fragrances</h2>
         <br>
         {% for edt in edt_comparision %} <!-- edt info for comparision -->
-        <h3>{{ edt[0] }}</h3>
+            <h3>{{ edt[0] }}</h3>
 
-        <p>
-            <strong>Brand: </strong>{{ edt[1] }}
-        </p>
+            <p><strong>Brand: </strong>{{ edt[1] }}</p>
 
-        <p>
-            <strong>Longevity: </strong>{{ edt[2] }}
-        </p>
+            <p></p><strong>Longevity: </strong>{{ edt[2] }}</p>
 
-        <p>
-            <strong>Bottle size: </strong>{{ edt[3] }}
-        </p>
+            <p><strong>Bottle size: </strong>{{ edt[3] }}</p>
 
-        <p>
-            <strong>Price: </strong>{{ edt[4] }} NZD
-        </p> 
+            <p><strong>Price: </strong>{{ edt[4] }} NZD</p> 
 
-        <br>
-        <hr>
-        <br>
+            <br>
+            <hr>
+            <br>
         {% endfor %}
     </div>
     
     
     <div class = "edp_container">
-        <p>edp fragrances go in here...blah blah blah</p>
+        <h2>EDP Fragrances</h2>
+        <br>
+        {% for edp in edp_conparision %} <!-- display all edp fragrances -->
+        
+            <h3>{{ edp[0] }}</h3>
+        
+            <p><strong>Brand: </strong>{{ edp[1] }}</p>
+
+            <p><strong>Longevity: </strong>{{ edp[2] }}</p>
+
+            <p><strong>Bottle size: </strong>{{ edp[3] }}</p>
+
+            <p><strong>Price: </strong>{{ edp[4] }} NZD</p> 
+
+            <br>
+            <hr>
+            <br>
+        {% endfor %}
     </div>
     
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 {%endblock%}
