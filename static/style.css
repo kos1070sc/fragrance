@@ -89,11 +89,22 @@
 
 
 
-/* fragrance_info.html*/
+/* bottle_info.html*/
+
+.bottle_info_container{
+  display: flex;
+  align-items: center;
+}
 
 .fragrance_info_container{
-  padding: 75px;
+  flex: 2;
 }
+
+.fragrance_img_container{
+  flex: 2;
+  padding-left: 100px;
+}
+
 
 
 

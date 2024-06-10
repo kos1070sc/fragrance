@@ -3,13 +3,25 @@
 
 {%block content%}
 
-    <p><strong>Name: </strong>{{info[0]}}</p>
-    <p><strong>Brand: </strong>{{brand[0]}}</p>
-    <p><strong>Description: </strong>{{info[1]}}</p>
-    <p><strong>Concentration: </strong>{{info[2]}}</p>
-    <p><strong>Longevity: </strong>{{info[3]}}</p>
-    <p><strong>Bottle size: </strong>{{info[4]}}</p>
-    <p><strong>Price: </strong>{{info[5]}} NZD</p>
+    <div class = "bottle_info_container">
+        <div class = "fragrance_info_container">
+            <p><strong>Name: </strong>{{info[0]}}</p>
+            <p><strong>Brand: </strong>{{brand[0]}}</p>
+            <p><strong>Description: </strong>{{info[1]}}</p>
+            <p><strong>Concentration: </strong>{{info[2]}}</p>
+            <p><strong>Longevity: </strong>{{info[3]}}</p>
+            <p><strong>Bottle size: </strong>{{info[4]}}</p>
+            <p><strong>Price: </strong>{{info[5]}} NZD</p>
+        </div>
+
+        <div class = "fragrance_img_container">
+            <img src="static/images/{{info[0]}}.jpg" alt="{{info[0]}} Image">
+        </div>
+    </div>
+    
+
+
+    
 
     <br>
     <h3>Notes</h3>
