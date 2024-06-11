@@ -105,6 +105,11 @@
   padding-left: 100px;
 }
 
+.fragrance_img_container img{
+  height: 300px;
+  padding-top: 50px;
+}
+
 
 
 
@@ -121,7 +126,9 @@
   flex: 2;
 }
 
+
 .edp_container{
   flex: 2;
   padding: 50px;
 }
+

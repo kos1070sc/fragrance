@@ -74,7 +74,7 @@ def bottle(id):
 
     #bottle info
     cur.execute('''SELECT bottle_name, bottle_description, bottle_concentration, 
-                bottle_longevity, bottle_size, bottle_price FROM Fragrance WHERE 
+                bottle_longevity, bottle_size, bottle_price, bottle_photo FROM Fragrance WHERE 
                 bottle_id = ?;''', (id,))
     fragrance_info = cur.fetchone()
 
@@ -106,15 +106,15 @@ def comparision():
     connection = sqlite3.connect('fragrance.db') #connect to database 
     cur = connection.cursor()
     cur.execute('''SELECT bottle_name, brand_name, bottle_longevity, 
-                bottle_size, bottle_price FROM Fragrance INNER JOIN 
+                bottle_size, bottle_price, bottle_photo FROM Fragrance INNER JOIN 
                 Designer ON Fragrance.bottle_brand = Designer.brand_id 
                 WHERE bottle_concentration = 'EDT';''')
     edt_result = cur.fetchall()
     
     cur.execute('''SELECT bottle_name, brand_name, bottle_longevity, 
-                bottle_size, bottle_price FROM Fragrance INNER JOIN Designer ON 
-                Fragrance.bottle_brand = Designer.brand_id WHERE 
-                bottle_concentration = 'EDP';''')
+                bottle_size, bottle_price, bottle_photo FROM Fragrance 
+                INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id 
+                WHERE bottle_concentration = 'EDP';''')
     edp_result = cur.fetchall()
     connection.close()
 
