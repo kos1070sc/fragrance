@@ -125,15 +125,20 @@ def comparision():
 
 
 
+##
+##Form page
+##
 
-
+@app.route("/form")
+def form():
+    return render_template("review.html")
 
 
 
 #
 #Some fun triangles 
 #
-@app.route('/triangle/<int:size>')
+@app.route("/triangle/<int:size>")
 def triangle(size):
     triangle = ""
     for i in range(1, size + 1):
