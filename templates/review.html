@@ -1,6 +1,18 @@
 {%extends "layout.html"%}
 {%block content%}
 
-<h1>Hello World, this is the form page</h1>
+<h1>Hello World, this is the review page</h1>
+
+<form action="">
+    <label for="username">Username:</label>
+    <br>
+    <input type="text" id = "username" name = "usename" value = "Your username">
+    <br><br>
+    <label for="review">Review:</label>
+    <br>
+    <input type="text" id = "review" name = "review" value = "Write review">
+    <br><br>
+    <input type="submit" value = "Submit">
+</form>
 
 {%endblock%}
