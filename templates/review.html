@@ -1,13 +1,20 @@
 {%extends "layout.html"%}
 {%block content%}
 
-<h1>Hello World, this is the review page</h1>
+<h1>Write a review!</h1>
 
-<form action="">
+<form action="/submit_review" method = "POST">
     <label for="username">Username:</label>
     <br>
-    <input type="text" id = "username" name = "usename" value = "Your username">
+    <input type="text" id = "username" name = "username" value = "Your username">
     <br><br>
+
+    <label for="fragrance">Choose a fragrance</label>
+    <select name="" id="">
+        <option value=""></option>
+    </select>
+
+
     <label for="review">Review:</label>
     <br>
     <input type="text" id = "review" name = "review" value = "Write review">
