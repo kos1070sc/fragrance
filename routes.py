@@ -131,23 +131,21 @@ def comparision():
 
 @app.route("/form")
 def form():
-    connection = sqlite3.connect('fragrance.db') #connect to database 
-    cur = connection.cursor()
-    cur.execute('''SELECT bottle_name FROM Fragrance; ''')
-    fragrance_names = cur.fetchall()
-    return render_template("review.html", names = fragrance_names)
+    return render_template("review.html")
 
 @app.route("/submit_review", methods = ["POST"])
 def submit_review():
     username = request.form['username']
+    fid = request.form['fid']
     review = request.form['review']
+
     connection = sqlite3.connect('fragrance.db') #connect to database 
     cur = connection.cursor()
-    cur.execute('''INSERT INTO Form (review_username, review_content) 
-                VALUES (?,?)''', (username, review))
+    cur.execute('''INSERT INTO Form (review_username, review_fid, review_content) 
+                VALUES (?,?,?)''', (username, fid, review,)) #insert responese into the database
     connection.commit()
     connection.close()
-    return redirect(url_for('form'))
+    return redirect(url_for('form'))#redirects the user back to the form page 
 
 
 
