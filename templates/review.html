@@ -4,9 +4,9 @@
 <h1>Write a review!</h1>
 
 <form action="/submit_review" method = "POST">
-    <label for="username">Username:</label>
+    <label for="username">Name:</label>
     <br>
-    <input type="text" id = "username" name = "username" value = "Your username">
+    <input type="text" id = "username" name = "username" value = "Your name">
     <br><br>
 
     <label for="fragrance">Choose a fragrance:</label>
@@ -36,8 +36,19 @@
     <input type="text" id = "review" name = "review" value = "Write review">
     <br><br>
     <input type="submit" value = "Submit">
+    <br><br>
 </form>
 
+
+
+
+<h1>Reviews</h1>
+{% for review in reviews %}
+    <p><strong>Name: </strong>{{ review[0] }}</p>
+    <p><strong>Fragrance: </strong>{{ review[1] }}</p>
+    <p>{{ review[2] }}</p>
+    <br><br>
+{% endfor %}
 
 
 {%endblock%}

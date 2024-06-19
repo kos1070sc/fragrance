@@ -131,8 +131,19 @@ def comparision():
 
 @app.route("/form")
 def form():
-    return render_template("review.html")
+    connection = sqlite3.connect('fragrance.db') #connect to database 
+    cur = connection.cursor()
+    cur.execute('''SELECT review_username, bottle_name, review_content 
+                FROM Fragrance INNER JOIN Form ON Fragrance.bottle_id = 
+                Form.review_fid WHERE review_approval = 1;''')
+                #Selects approved reviews and displays on the page
+    fragrance_reviews = cur.fetchall()
+    connection.close()
+    return render_template("review.html", reviews = fragrance_reviews)
 
+##
+##Submit review page
+##
 @app.route("/submit_review", methods = ["POST"])
 def submit_review():
     username = request.form['username']
@@ -150,7 +161,7 @@ def submit_review():
 
 
 #
-#Some fun triangles 
+#Some fun triangles!!!
 #
 @app.route("/triangle/<int:size>")
 def triangle(size):
