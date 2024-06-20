@@ -1,16 +1,22 @@
 
 /* layout.html */
 
-#navbar{
+.navbar{
     background-color:grey;
-    height: auto;
     text-align: center;
-    font-size: 25px;
 }
 
-.link{
+.navbar a{
     color:cyan; 
-    padding-left: 100px;
+    text-decoration: none;
+    font-size: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.navbar a:hover{
+  background-color: cyan;
+  color: black;
 }
 
 .header{

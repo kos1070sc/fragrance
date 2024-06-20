@@ -43,12 +43,15 @@
 
 
 <h1>Reviews</h1>
-{% for review in reviews %}
-    <p><strong>Name: </strong>{{ review[0] }}</p>
-    <p><strong>Fragrance: </strong>{{ review[1] }}</p>
-    <p>{{ review[2] }}</p>
-    <br><br>
-{% endfor %}
+
+<div class = "reviews">
+    {% for review in reviews %}
+        <p><strong>Name: </strong>{{ review[0] }}</p>
+        <p><strong>Fragrance: </strong>{{ review[1] }}</p>
+        <p>{{ review[2] }}</p>
+        <br><br>
+    {% endfor %}
+</div>
 
 
 {%endblock%}
