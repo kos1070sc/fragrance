@@ -3,24 +3,36 @@
 
 .navbar{
     background-color:grey;
-    text-align: center;
+    display: flex;
+    align-items: center; /* align the items in the center vertically */
+    justify-content: center;  /* align the items in the center horizontally */
+    height: 80px;
 }
 
 .navbar a{
     color:cyan; 
     text-decoration: none;
-    font-size: 25px;
+    font-size: 30px;
     padding-left: 50px;
     padding-right: 50px;
+    transition: background-color 0.3s, color 0.3s; /* For smooth transitions */
+    
 }
 
 .navbar a:hover{
   background-color: cyan;
   color: black;
+  height: 80px;
+  display: flex;
+  align-items: center; /* align the items in the center vertically */
+  justify-content: center;  /* align the items in the center horizontally */
 }
 
 .header{
-    text-align: center;
+    font-size: 30px;
+    color: black; 
+    text-align: center; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for header text */
 }
 
 .content{
@@ -40,9 +52,6 @@
   text-align: center;
 }
 
-.page_title{
-  
-}
 
 
 
