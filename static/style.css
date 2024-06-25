@@ -1,6 +1,10 @@
 
 /* layout.html */
 
+body{
+   font-family: Georgia, serif;
+}
+
 .navbar{
     background-color:grey;
     display: flex;
@@ -33,11 +37,22 @@
     color: black; 
     text-align: center; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for header text */
+    opacity: 0;
+    /* Set the initial opacity to 0 to make the title fade in*/
+    animation: fadein ease-in forwards;
+    animation-duration: 1.5s;
 }
+
+/* what the fadein animation */
+@keyframes fadein {
+    to {opacity: 1;}
+  }
+
 
 .content{
     padding-left: calc(25% - 20px);
     padding-right: calc(25% - 20px);
+
 }
 
 .footer{
