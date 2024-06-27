@@ -43,7 +43,7 @@ body{
     animation-duration: 1.5s;
 }
 
-/* what the fadein animation */
+/* what the fadein animation does*/
 @keyframes fadein {
     to {opacity: 1;}
   }
@@ -92,11 +92,18 @@ body{
 .introduction_image img {
   max-width: 100%;
   height: auto;
+  box-shadow: 5px 5px rgb(46, 43, 43);
+  border-radius: 3px;
 }
 
-.hero_image{
+.hero_container img{
+  height: 100%;
   width: 100%;
-  height: auto;
+  border-radius: 5px;
+}
+
+.hero_container img:hover{
+  opacity: 0.7;
 }
 
 
