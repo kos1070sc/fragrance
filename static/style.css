@@ -49,6 +49,10 @@ body{
   }
 
 
+.search_bar{
+  align-items: center;
+}
+
 .content{
     padding-left: calc(25% - 20px);
     padding-right: calc(25% - 20px);

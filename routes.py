@@ -146,17 +146,32 @@ def form():
 ##
 @app.route("/submit_review", methods = ["POST"])
 def submit_review():
-    username = request.form['username']
-    fid = request.form['fid']
-    review = request.form['review']
+    username = request.form["username"]
+    fid = request.form["fid"]
+    review = request.form["review"]
 
-    connection = sqlite3.connect('fragrance.db') #connect to database 
+    connection = sqlite3.connect("fragrance.db") #connect to database 
     cur = connection.cursor()
     cur.execute('''INSERT INTO Form (review_username, review_fid, review_content) 
                 VALUES (?,?,?)''', (username, fid, review,)) #insert responese into the database
     connection.commit()
     connection.close()
-    return redirect(url_for('form'))#redirects the user back to the form page 
+    return redirect(url_for("form"))#redirects the user back to the form page 
+
+
+@app.route("/search", methods = ["POST"])
+def search():
+    fragrance = request.form["search_bar"]
+    connection = sqlite3.connect("fragrance.db") #connect to database 
+    cur = connection.cursor()
+    cur.execute(''' SELECT * FROM Fragrance WHERE bottle_name = ?;''', (fragrance,))
+    search_results = cur.fetchone()
+    connection.close()
+    if search_results == None:
+        return("poop, there is nothing")
+    else:
+        return str(search_results) #converts search results into a string
+
 
 
 
