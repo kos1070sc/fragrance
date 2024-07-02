@@ -161,10 +161,10 @@ def submit_review():
 
 @app.route("/search", methods = ["POST"])
 def search():
-    fragrance = request.form["search_bar"]
+    fragrance = request.form["search_bar"].lower() #this makes the search case insensitive
     connection = sqlite3.connect("fragrance.db") #connect to database 
     cur = connection.cursor()
-    cur.execute(''' SELECT * FROM Fragrance WHERE bottle_name = ?;''', (fragrance,))
+    cur.execute(''' SELECT * FROM Fragrance WHERE LOWER(bottle_name) = ?;''', (fragrance,))
     search_results = cur.fetchone()
     connection.close()
     if search_results == None:

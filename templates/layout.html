@@ -27,11 +27,16 @@
 			<!-- pages in navbar -->
 		</nav>
 
-		<form action="/search" method = "POST" class = "search_bar">
-			<label for="search_bar">search a fragrance</label>
-			<input type="text" id = "search_bar", name = "search_bar">
-			<button type = "submit">Search</button>
-		</form>
+
+			<!-- searchbar -->
+		<div>
+			<form action="/search" method = "POST" class = "search_bar">
+				<label for="search_bar">Search a fragrance: </label>
+				<input type="text" id = "search_bar", name = "search_bar">
+				<button type = "submit">Search</button>
+			</form>
+		</div>
+		
 
 		<main class = "content">
 			{%block content%}{%endblock%}

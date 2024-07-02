@@ -49,8 +49,32 @@ body{
   }
 
 
-.search_bar{
-  align-items: center;
+.search_bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.search_bar label{
+  font-size: 20px;
+  padding-right: 10px;
+}
+
+.search_bar input {
+  padding-right: 10px
+}
+
+
+.search_bar button{
+  height: 35px;
+  width: 90px;
+  background-color: gold;
+  border-radius: 5px;
+}
+
+.search_bar button:hover{
+  background-color: rgb(255, 230, 91);
 }
 
 .content{
