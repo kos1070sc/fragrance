@@ -78,7 +78,7 @@ def bottle(id):
                 bottle_id = ?;''', (id,))
     fragrance_info = cur.fetchone()
 
-    #select bottle brand
+    #bottle brand
     cur.execute('''SELECT brand_name from Fragrance INNER JOIN Designer ON 
                 Fragrance.bottle_brand = Designer.brand_id 
                 WHERE bottle_id = ?;''', (id,))
@@ -149,7 +149,6 @@ def submit_review():
     username = request.form["username"]
     fid = request.form["fid"]
     review = request.form["review"]
-
     connection = sqlite3.connect("fragrance.db") #connect to database 
     cur = connection.cursor()
     cur.execute('''INSERT INTO Form (review_username, review_fid, review_content) 
@@ -158,19 +157,22 @@ def submit_review():
     connection.close()
     return redirect(url_for("form"))#redirects the user back to the form page 
 
-
+##
+##Search page
+##
 @app.route("/search", methods = ["POST"])
 def search():
     fragrance = request.form["search_bar"].lower() #this makes the search case insensitive
     connection = sqlite3.connect("fragrance.db") #connect to database 
     cur = connection.cursor()
-    cur.execute(''' SELECT * FROM Fragrance WHERE LOWER(bottle_name) = ?;''', (fragrance,))
-    search_results = cur.fetchone()
+    cur.execute(''' SELECT bottle_name, bottle_brand, bottle_concentration FROM Fragrance WHERE LOWER(bottle_name) LIKE ?;''', 
+                ('%' + fragrance + '%',)) #return result even if there is only a partial input
+    search_results = cur.fetchall()
     connection.close()
-    if search_results == None:
-        return("poop, there is nothing")
+    if not search_results: #checks if the result are fasly values
+        return("poop, there is nothing that matches your search")
     else:
-        return str(search_results) #converts search results into a string
+        return render_template("search.html", search_results = search_results)
 
 
 

@@ -191,11 +191,13 @@ body{
   flex: 2;
 }
 
-
-
-
 .edp_container{
   flex: 2;
   padding: 50px;
 }
 
+
+/* search.html */
+.search_result{
+  border-color: black;
+}
