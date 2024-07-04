@@ -162,15 +162,21 @@ def submit_review():
 ##
 @app.route("/search", methods = ["POST"])
 def search():
-    fragrance = request.form["search_bar"].lower() #this makes the search case insensitive
+    search = request.form["search_bar"].lower() #this makes the search case insensitive
     connection = sqlite3.connect("fragrance.db") #connect to database 
     cur = connection.cursor()
-    cur.execute(''' SELECT bottle_name, bottle_brand, bottle_concentration FROM Fragrance WHERE LOWER(bottle_name) LIKE ?;''', 
-                ('%' + fragrance + '%',)) #return result even if there is only a partial input
+    cur.execute('''SELECT bottle_name, brand_name, bottle_concentration FROM Fragrance 
+                INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id 
+                WHERE LOWER(bottle_name) LIKE ?
+                   OR LOWER(bottle_concentration) LIKE ?
+                   OR LOWER(brand_name) LIKE ?;''', 
+                #the user can search for the name, brand or centration of the fragrance
+                ('%' + search + '%', '%' + search + '%', '%' + search + '%',)) 
+                #return result even if there is only a partial input
     search_results = cur.fetchall()
     connection.close()
     if not search_results: #checks if the result are fasly values
-        return("poop, there is nothing that matches your search")
+        return("Poop, there is nothing that matches your search. Please check your spelling.")
     else:
         return render_template("search.html", search_results = search_results)
 
@@ -191,12 +197,6 @@ def triangle(size):
 def reverse_triangle(size):
     for i in range(size, 0, -1):
         print('*' * i)
-
-
-
-
-
-
 
 
 
