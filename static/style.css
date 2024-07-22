@@ -201,3 +201,13 @@ body{
 .search_result{
   border-color: black;
 }
+
+
+/* no_result.html */
+.error{
+  border: 2px solid black;
+  outline: solid;
+  border-radius: 10px;
+  background-color: red;
+  
+}

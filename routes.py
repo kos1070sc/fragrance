@@ -149,10 +149,11 @@ def submit_review():
     username = request.form["username"]
     fid = request.form["fid"]
     review = request.form["review"]
-    connection = sqlite3.connect("fragrance.db") #connect to database 
+    connection = sqlite3.connect("fragrance.db") #connect to database
     cur = connection.cursor()
-    cur.execute('''INSERT INTO Form (review_username, review_fid, review_content) 
-                VALUES (?,?,?)''', (username, fid, review,)) #insert responese into the database
+    cur.execute('''INSERT INTO Form (review_username, review_fid, review_content)
+                VALUES (?,?,?)''', (username, fid, review,)) 
+                #insert responese into the database
     connection.commit()
     connection.close()
     return redirect(url_for("form"))#redirects the user back to the form page 
@@ -176,7 +177,7 @@ def search():
     search_results = cur.fetchall()
     connection.close()
     if not search_results: #checks if the result are fasly values
-        return("Poop, there is nothing that matches your search. Please check your spelling.")
+        return render_template("no_results.html")
     else:
         return render_template("search.html", search_results = search_results)
 
