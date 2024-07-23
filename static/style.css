@@ -198,16 +198,46 @@ body{
 
 
 /* search.html */
-.search_result{
+.search_container{
+  border-width: 2px;
+  border-style: solid;
   border-color: black;
+  border-radius: 10px;
+  padding-left: 50px;
+  box-shadow: 5px 5px;
+  display: flex;
 }
 
+.search_result{
+  flex: 5;
+}
+
+.arrow{
+  flex: 1;
+  padding-left: 20px;
+  border-width: 0px;
+  border-left: 2px;
+  border-style: solid;
+  border-radius: 10px;
+  padding-left: 10%;
+  background-color: gold;
+}
+
+.arrow :hover{
+  background-color: cyan;
+}
+
+.arrow h1{
+  font-size: 50px;
+}
 
 /* no_result.html */
 .error{
-  border: 2px solid black;
-  outline: solid;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
   border-radius: 10px;
-  background-color: red;
-  
+  background-color: rgb(255, 60, 60);
+  padding-left: 50px;
+  width: auto;
 }
