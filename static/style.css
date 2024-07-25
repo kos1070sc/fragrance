@@ -220,16 +220,21 @@ body{
   border-style: solid;
   border-radius: 10px;
   padding-left: 10%;
-  background-color: gold;
+  background-color: cyan;
+  transition: background-color 0.3s ease;   /* make the new background colour ease in */
+  text-decoration: none;
+  color: black;
 }
 
-.arrow :hover{
-  background-color: cyan;
+.arrow:hover{
+  background-color: gold;
 }
 
 .arrow h1{
   font-size: 50px;
 }
+
+
 
 /* no_result.html */
 .error{

@@ -166,12 +166,12 @@ def search():
     search = request.form["search_bar"].lower() #this makes the search case insensitive
     connection = sqlite3.connect("fragrance.db") #connect to database 
     cur = connection.cursor()
-    cur.execute('''SELECT bottle_name, brand_name, bottle_concentration FROM Fragrance 
+    cur.execute('''SELECT bottle_name, brand_name, bottle_concentration, bottle_id FROM Fragrance 
                 INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id 
                 WHERE LOWER(bottle_name) LIKE ?
                    OR LOWER(bottle_concentration) LIKE ?
                    OR LOWER(brand_name) LIKE ?;''', 
-                #the user can search for the name, brand or centration of the fragrance
+                #the user can search for the name, brand or concentration of the fragrance
                 ('%' + search + '%', '%' + search + '%', '%' + search + '%',)) 
                 #return result even if there is only a partial input
     search_results = cur.fetchall()
