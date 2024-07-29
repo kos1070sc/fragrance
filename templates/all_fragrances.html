@@ -6,15 +6,21 @@
 <hr/>
 
     {% for fragrance in fragrances %} 
-    <!-- Lists out all of the edt fragrances -->
-    <h3>{{ fragrance[1] }}</h3>
-    <!-- Link for more info -->
-    <a href = "http://127.0.0.1:5000/fragrance/{{fragrance[0]}}">
-        More Info<br><br>
-    </a> 
 
-    
+        <div class = fragrance_container>
 
+            <div class = fragrance_name>
+                <!-- Lists out all of the edt fragrances -->
+                <h3>{{ fragrance[1] }}</h3>
+                <!-- Link for more info -->
+            </div>
+
+            <a href = "http://127.0.0.1:5000/fragrance/{{fragrance[0]}}" class = arrow>
+                <h1>➢</h1>
+            </a> 
+
+        </div>
+        <br><br><br>
     
     {% endfor %}
 

@@ -24,7 +24,7 @@ body{
 }
 
 .navbar a:hover{
-  background-color: cyan;
+  background-color: gold;
   color: black;
   height: 80px;
   display: flex;
@@ -135,16 +135,16 @@ body{
 }
 
 
-.featured_brands_container{
+.featured_brand_container{
   padding: 30px;
   text-align: center;
 }
 
-.featured_brands_container h4{
+.featured_brand_container h4{
   font-size: 30px;
 }
 
-.featured_brands_container h3{
+.featured_brand_container h3{
   font-size: 40px;
 }
 
@@ -206,6 +206,10 @@ body{
   padding-left: 50px;
   box-shadow: 2px 2px;
   display: flex;
+  opacity: 0;
+  /* Set the initial opacity to 0 to make the title fade in*/
+  animation: fadein ease-in forwards;
+  animation-duration: 1s;
 }
 
 .search_result{
@@ -253,3 +257,22 @@ body{
 
 
 
+/* all_fragrances.html */
+
+.fragrance_container{
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  padding-left: 50px;
+  box-shadow: 2px 2px;
+  display: flex;
+}
+
+.fragrance_name{
+  flex:5;
+}
+
+.fragrance_link{
+  flex:1;
+}
