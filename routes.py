@@ -4,11 +4,7 @@ import sqlite3
 app = Flask(__name__)
 
 
-
-
-#
-#Route for homepage
-#
+# Route for homepage
 @app.route("/")
 def home():
     connection = sqlite3.connect('fragrance.db') #connect to database 
@@ -16,12 +12,10 @@ def home():
     cur.execute("SELECT brand_name FROM Designer;")
     fragrance_brand = cur.fetchall()
     connection.close()
-    return render_template("home.html", brands = fragrance_brand)
+    return render_template("home.html", brands=fragrance_brand)
 
 
-#
-#Route for EDP page
-#  
+# Route for EDP page
 @app.route("/EDP")
 def edp():
     connection = sqlite3.connect('fragrance.db') #connect to database 
@@ -36,7 +30,7 @@ def edp():
                 FROM Fragrance WHERE bottle_concentration = 'EDP';''')
     fragrance_concentration = cur.fetchone()
     connection.close()
-    return render_template("all_fragrances.html", fragrances = fragrance_result, 
+    return render_template("all_fragrances.html", fragrances=fragrance_result, 
                             concentration = fragrance_concentration)
 
 

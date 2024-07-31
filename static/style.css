@@ -1,8 +1,14 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
 /* layout.html */
 
 body{
-   font-family: Georgia, serif;
+   margin:0;
+   padding: -5%;
+   font-family: "Cormorant", serif;
+   font-weight: 500;
+   font-style: normal;
+   font-size: larger;
 }
 
 .navbar{
@@ -13,6 +19,10 @@ body{
     height: 80px;
 }
 
+
+/* // <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 400 to 900*/
+
 .navbar a{
     color:cyan; 
     text-decoration: none;
@@ -20,7 +30,9 @@ body{
     padding-left: 50px;
     padding-right: 50px;
     transition: background-color 0.3s, color 0.3s; /* For smooth transitions */
-    
+    font-family: "Vollkorn", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .navbar a:hover{
@@ -41,6 +53,7 @@ body{
     /* Set the initial opacity to 0 to make the title fade in*/
     animation: fadein ease-in forwards;
     animation-duration: 1.5s;
+    font-family: Georgia, serif;
 }
 
 /* what the fadein animation does*/
@@ -162,7 +175,7 @@ body{
 }
 
 .fragrance_info_container{
-  flex: 2;
+  flex: 8;
 }
 
 .fragrance_img_container{
@@ -271,8 +284,11 @@ body{
 
 .fragrance_name{
   flex:5;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .fragrance_link{
   flex:1;
 }
+
