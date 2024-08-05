@@ -98,14 +98,13 @@ body{
 
 .footer{
   background-color: grey;
-  height: 50px;
+  height: auto;
 }
 
 .footer p{
   color: cyan;
   padding-left: calc(25% - 20px);
   padding-right: calc(25% - 20px);
-  text-align: center;
 }
 
 
