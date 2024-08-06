@@ -99,12 +99,25 @@ body{
 .footer{
   background-color: grey;
   height: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .footer p{
   color: cyan;
   padding-left: calc(25% - 20px);
   padding-right: calc(25% - 20px);
+  
+}
+
+.footer a{
+  color: gold;
+}
+
+.footer hr{
+  height: 1px;
+  background-color: gold;
+  border-bottom: gold;
 }
 
 
@@ -132,7 +145,7 @@ body{
 .introduction_image img {
   max-width: 100%;
   height: auto;
-  box-shadow: 5px 5px rgb(46, 43, 43);
+  box-shadow: 3px 3px rgb(46, 43, 43);
   border-radius: 3px;
 }
 
@@ -140,25 +153,41 @@ body{
   height: 100%;
   width: 100%;
   border-radius: 5px;
+  box-shadow: 5px 5px rgb(46, 43, 43);
+  
 }
 
-.hero_container img:hover{
-  opacity: 0.7;
-}
 
 
 .featured_brand_container{
   padding: 30px;
   text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+}
+
+.featured_brand_container img{
+  width: auto;
+  opacity: 0;
+  transition: 0.5s ease-in-out;
+}
+
+
+.featured_brand_container img:hover{
+  opacity: 1;
+}
+
+.featured_brand_container:hover{
+  transition: 0.5s ease-in-out;
+  background-color: gold;
 }
 
 .featured_brand_container h4{
-  font-size: 30px;
+  font-size: 20px;
 }
 
-.featured_brand_container h3{
-  font-size: 40px;
-}
 
 
 

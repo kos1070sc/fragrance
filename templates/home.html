@@ -40,16 +40,17 @@
 </div>
 
 
-<div class = "featured_brands_container">
-    <h3>Feature Brands</h3>
-    <hr>
-</div>
+
+<h2>Feature Brands</h2>
+<hr>
+
 
 {% for brand in brands %}
-<div class = "featured_brands_container">
+<div class = "featured_brand_container">
     <h4>{{ brand[0] }}</h4>
+    <img src="static/images/intro_img.png" alt="">
 </div>
-
+<br><br>
 
 {% endfor %}
 
