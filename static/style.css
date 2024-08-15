@@ -168,24 +168,13 @@ body{
   border-radius: 10px;
 }
 
-.featured_brand_container img{
-  width: auto;
-  opacity: 0;
-  transition: 0.5s ease-in-out;
-}
-
-
-.featured_brand_container img:hover{
-  opacity: 1;
-}
-
 .featured_brand_container:hover{
   transition: 0.5s ease-in-out;
   background-color: gold;
 }
 
 .featured_brand_container h4{
-  font-size: 20px;
+  font-size: 30px;
 }
 
 
