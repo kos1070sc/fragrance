@@ -123,15 +123,26 @@ def submit_review():
     username = request.form["username"]
     fid = request.form["fid"]
     review = request.form["review"]
-    connection = sqlite3.connect("fragrance.db")  # connect to database
-    cur = connection.cursor()
-    cur.execute('''INSERT INTO Form (review_username, review_fid,
-                review_content) VALUES (?,?,?)''', (username, fid, review,))
-    # insert responese into the database
-    connection.commit()
-    connection.close()
-    return redirect(url_for("form"))
-    # redirects the user back to the form page
+    # checks if username or review is null
+    if not username or not review:
+        return '''Error, can not have a null input for name or review.
+                Please fill out the form fully.'''
+    # checks if username is longer than 30 characters
+    elif len(username) > 30:
+        return "Error, name too long. Please enter a name under 30 characters"
+    # checks if review is longer than 40 characters
+    elif len(review) > 500:
+        return "Error, your reivew is too long. Please shorten it to 500 characters"
+    else:
+        connection = sqlite3.connect("fragrance.db")  # connect to database
+        cur = connection.cursor()
+        cur.execute('''INSERT INTO Form (review_username, review_fid,
+                    review_content) VALUES (?,?,?)''', (username, fid, review,))
+        # insert responese into the database
+        connection.commit()
+        connection.close()
+        return redirect(url_for("form"))
+        # redirects the user back to the form page
 
 
 # Search page
