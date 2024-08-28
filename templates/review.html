@@ -35,23 +35,31 @@
     <br>
     <input type="text" id = "review" name = "review" value = "Write review">
     <br><br>
-    <input type="submit" value = "Submit">
+    <input type="submit" value = "Submit" class = "submit">
     <br><br>
 </form>
 
 
 
 
-<h1>Reviews</h1>
+<div class = "review_container">
+    <h1>Reviews</h1>
 
-<div class = "reviews">
-    {% for review in reviews %}
-        <p><strong>Name: </strong>{{ review[0] }}</p>
-        <p><strong>Fragrance: </strong>{{ review[1] }}</p>
-        <p>{{ review[2] }}</p>
-        <br><br>
-    {% endfor %}
+        {% for review in reviews %}
+            <div class = "reviews">
+                <p class = "review_fragrance"><strong>Fragrance: </strong>{{ review[1] }}</p>
+                <p>{{ review[2] }}</p>
+
+                <div class = "profile_container">
+                    <div class = "picture"><img src="static\images\profile.jpg" alt="profile picture"></div>
+                    <div class = "name"><p><strong>-{{ review[0] }}</strong></p></div>
+                </div>
+                <br>
+            </div>
+            <br><br>
+        {% endfor %}
 </div>
+
 
 
 {%endblock%}

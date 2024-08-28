@@ -309,3 +309,51 @@ body{
   flex:1;
 }
 
+
+/* review.html */
+
+
+.reviews{
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  box-shadow: 3px 3px;
+  width: auto;
+}
+
+.reviews p{
+  padding-left: 20px;
+}
+
+.profile_container{
+  display: flex;
+}
+
+.picture{
+  flex: 1;
+  padding-left: 15px;
+}
+
+.picture img{
+  width: 75px;
+  border-radius: 75px;
+}
+
+.name{
+  flex: 9;
+}
+
+.review_fragrance{
+  font-size: 25px;
+}
+
+.submit{
+  background-color: gold;
+  width: 100px;
+  height: 30px;
+}
+
+.submit:hover{
+  background-color: rgb(255, 230, 91);
+}

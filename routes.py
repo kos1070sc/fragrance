@@ -132,12 +132,14 @@ def submit_review():
         return "Error, name too long. Please enter a name under 30 characters"
     # checks if review is longer than 40 characters
     elif len(review) > 500:
-        return "Error, your reivew is too long. Please shorten it to 500 characters"
+        return '''Error, your reivew is too long.
+                Please shorten it to 500 characters'''
     else:
         connection = sqlite3.connect("fragrance.db")  # connect to database
         cur = connection.cursor()
         cur.execute('''INSERT INTO Form (review_username, review_fid,
-                    review_content) VALUES (?,?,?)''', (username, fid, review,))
+                    review_content) VALUES (?,?,?)''',
+                    (username, fid, review,))
         # insert responese into the database
         connection.commit()
         connection.close()
