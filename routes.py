@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, render_template_string
 import sqlite3
 
 app = Flask(__name__)
@@ -117,6 +117,7 @@ def form():
     return render_template("review.html", reviews=fragrance_reviews)
 
 
+
 # Submit review page
 @app.route("/submit_review", methods=["POST"])
 def submit_review():
@@ -125,15 +126,22 @@ def submit_review():
     review = request.form["review"]
     # checks if username or review is null
     if not username or not review:
-        return '''Error, can not have a null input for name or review.
-                Please fill out the form fully.'''
+        return render_template_string('''Error: Cannot have a null input for
+                                      name or review. Please fill out the
+                                      form fully.<a href="http://127.0.0.1:5000/form">
+                                      Go back to the form</a>''')
     # checks if username is longer than 30 characters
     elif len(username) > 30:
-        return "Error, name too long. Please enter a name under 30 characters"
+        return render_template_string('''Error: Name too long. Please enter a
+                                      name under 30 characters.
+                                      <a href="http://127.0.0.1:5000/form">
+                                      Go back to the form</a>''')
     # checks if review is longer than 40 characters
     elif len(review) > 500:
-        return '''Error, your reivew is too long.
-                Please shorten it to 500 characters'''
+        return render_template_string('''Error: Your review is too long. 
+                                      Please shorten it to 500 characters.
+                                      <a href="{{ url_for('form') }}">
+                                      Go back to the form</a>''')
     else:
         connection = sqlite3.connect("fragrance.db")  # connect to database
         cur = connection.cursor()

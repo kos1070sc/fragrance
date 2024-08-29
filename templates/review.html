@@ -6,7 +6,7 @@
 <form action="/submit_review" method = "POST">
     <label for="username">Name:</label>
     <br>
-    <input type="text" id = "username" name = "username" value = "Your name">
+    <input type="text" id = "username" name = "username" value = "Your name" minlength = "1" maxlength="30">
     <br><br>
 
     <label for="fragrance">Choose a fragrance:</label>
@@ -33,7 +33,7 @@
 
     <label for="review">Review:</label>
     <br>
-    <input type="text" id = "review" name = "review" value = "Write review">
+    <input type="text" id = "review" name = "review" value = "Write review" maxlength="500">
     <br><br>
     <input type="submit" value = "Submit" class = "submit">
     <br><br>
