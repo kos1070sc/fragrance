@@ -1,0 +1,55 @@
+{%extends "layout.html"%}
+{%block content%}
+
+
+
+<br><br>
+<div class = "success">
+    <h2>Success!</h2>
+    <h3>Your review has been submitted and is awaiting admin's approval.</h3>
+</div>
+
+<h1>Write a review!</h1>
+
+<form action="/submit_review" method = "POST">
+    <label for="username">Name:</label>
+    <br>
+    <input type="text" id = "username" name = "username" value = "Your name" minlength = "1" maxlength="30">
+    <br><br>
+
+    <label for="fragrance">Choose a fragrance:</label>
+    <br>
+    <select name="fid" id="fid">
+        
+        <option value="1">Le Male</option>
+        <option value="2">Le Male Le Parfum</option>
+        <option value="3">Eros Eau de Toilette </option>
+        <option value="4">Eros Eau de Parfum</option>
+        <option value="5">Bleu de Chanel Eau de Toilette</option>
+        <option value="6">Bleu de Chanel Eau de Parfum</option>
+        <option value="7">Acqua di Giò</option>
+        <option value="8">Acqua di Giò Profumo</option>
+        <option value="9">Sauvage Eau de Toillette</option>
+        <option value="10">Sauvage Eau de Parfum</option>
+        <option value="11">Light Blue Pour Homme</option>
+        <option value="12">Light Blue Intense</option>
+
+
+    </select>
+    <br><br>
+
+
+    <label for="review">Review:</label>
+    <br>
+    <input type="text" id = "review" name = "review" value = "Write review" maxlength="500">
+    <br><br>
+    <input type="submit" value = "Submit" class = "submit">
+    <br><br>
+</form>
+
+
+
+
+
+
+{%endblock%}

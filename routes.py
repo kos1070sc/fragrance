@@ -151,7 +151,7 @@ def submit_review():
         # insert responese into the database
         connection.commit()
         connection.close()
-        return redirect(url_for("form"))
+        return render_template("review_submit.html")
         # redirects the user back to the form page
 
 

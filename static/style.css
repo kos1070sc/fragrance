@@ -320,6 +320,7 @@ body{
   border-radius: 10px;
   box-shadow: 3px 3px;
   width: auto;
+  margin-right: 15%;
 }
 
 .reviews p{
@@ -356,4 +357,29 @@ body{
 
 .submit:hover{
   background-color: rgb(255, 230, 91);
+}
+
+
+
+
+/* review_success.html */
+.success{
+  margin-left: 10%;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  background-color: rgb(76, 255, 60);
+  opacity: 0;
+  /* Set the initial opacity to 0 to make the title fade in*/
+  animation: fadein ease-in forwards;
+  animation-duration: 2s;
+}
+
+.success h3{
+  padding-left: 15%;
+}
+
+.success h2{
+  padding-left: 15%;
 }
