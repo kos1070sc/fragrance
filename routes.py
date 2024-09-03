@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, render_template_string
+from flask import Flask, render_template, request, redirect, url_for,
+render_template_string
 import sqlite3
 
 app = Flask(__name__)
@@ -178,6 +179,12 @@ def search():
         return render_template("no_results.html")
     else:
         return render_template("search.html", search_results=search_results)
+
+
+#404 error page
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
 
 
 # Some fun triangles!!!

@@ -383,3 +383,48 @@ body{
 .success h2{
   padding-left: 15%;
 }
+
+
+
+/* 404.html */
+.oops_container{
+  display: flex;
+}
+
+.oops{
+  flex: 1;
+}
+
+.pikachu{
+  flex: 1;
+  width: 50%;
+}
+
+.oops h1{
+  font-size: 125px;
+}
+
+.oops p{
+  font-size: 35px;
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 24px;
+  color: cyan;
+  background-color: grey;
+  border-radius: 5px;
+  text-decoration: none;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: gold;
+  color: black;
+}

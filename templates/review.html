@@ -47,7 +47,10 @@
 
         {% for review in reviews %}
             <div class = "reviews">
-                <p class = "review_fragrance"><strong>Fragrance: </strong>{{ review[1] }}</p>
+                <div><p class = "review_fragrance"><strong>Fragrance: </strong>{{ review[1] }}</p>
+                    <hr>
+                </div>
+                
                 <p>{{ review[2] }}</p>
 
                 <div class = "profile_container">
@@ -55,8 +58,10 @@
                     <div class = "name"><p><strong>-{{ review[0] }}</strong></p></div>
                 </div>
                 <br>
+                
             </div>
-            <br><br>
+    <br><br>
+            
         {% endfor %}
 </div>
 
