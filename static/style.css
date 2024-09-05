@@ -283,6 +283,9 @@ body{
   background-color: rgb(255, 60, 60);
   padding-left: 50px;
   width: auto;
+  opacity: 0;
+  animation: fadein ease-in forwards;
+  animation-duration: 1.0s;
 }
 
 
@@ -357,6 +360,24 @@ body{
 
 .submit:hover{
   background-color: rgb(255, 230, 91);
+}
+
+.review_box{
+  width: 100%;
+  max-width: 600px; 
+  height: 150px; 
+  padding: 15px 0px 0px 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: grey;
+  font-size: 16px;
+  transform: border-color 0.3s; /* adds a smooth transition effect */
+}
+
+.review_box:focus{
+  border-color: black;
+  border-width: 3px;
 }
 
 

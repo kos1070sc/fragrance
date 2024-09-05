@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for,
-render_template_string
+from flask import Flask, render_template, request, redirect, url_for, render_template_string
 import sqlite3
 
 app = Flask(__name__)
@@ -21,9 +20,9 @@ def home():
 def edp():
     connection = sqlite3.connect('fragrance.db')  # connect to database
     cur = connection.cursor()
-    cur.execute('''SELECT bottle_id, bottle_name FROM Fragrance 
+    cur.execute('''SELECT bottle_id, bottle_name FROM Fragrance
                 INNER JOIN Designer 
-                ON Fragrance.bottle_brand = Designer.brand_id 
+                ON Fragrance.bottle_brand = Designer.brand_id
                 WHERE bottle_concentration = 'EDP';''')
     fragrance_result = cur.fetchall()
     cur.execute('''SELECT bottle_concentration 
@@ -118,7 +117,6 @@ def form():
     return render_template("review.html", reviews=fragrance_reviews)
 
 
-
 # Submit review page
 @app.route("/submit_review", methods=["POST"])
 def submit_review():
@@ -181,7 +179,7 @@ def search():
         return render_template("search.html", search_results=search_results)
 
 
-#404 error page
+# 404 error page
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
