@@ -32,7 +32,6 @@ body{
     transition: background-color 0.3s, color 0.3s; /* For smooth transitions */
     font-family: "Vollkorn", serif;
     font-weight: 400;
-    font-style: normal;
 }
 
 .navbar a:hover{
@@ -168,10 +167,7 @@ body{
   border-radius: 10px;
 }
 
-.featured_brand_container:hover{
-  transition: 0.5s ease-in-out;
-  background-color: gold;
-}
+
 
 .featured_brand_container h4{
   font-size: 30px;
@@ -288,6 +284,10 @@ body{
   animation-duration: 1.0s;
 }
 
+.error a{
+  color: gold;
+}
+
 
 
 /* all_fragrances.html */
@@ -372,7 +372,6 @@ body{
   border-radius: 10px;
   border-color: grey;
   font-size: 16px;
-  transform: border-color 0.3s; /* adds a smooth transition effect */
 }
 
 .review_box:focus{
@@ -380,6 +379,19 @@ body{
   border-width: 3px;
 }
 
+.username{
+  font-size: 14px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: grey;
+  padding: 5px 0px 5px 5px;
+}
+
+.username:focus{
+  border-color: black;
+  border-width: 3px;
+}
 
 
 
