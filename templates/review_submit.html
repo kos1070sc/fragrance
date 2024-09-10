@@ -2,21 +2,22 @@
 {%block content%}
 
 
-
+<!-- success message for when the user submits their review -->
 <br><br>
 <div class = "success">
     <h2>Success!</h2>
     <h3>Your review has been submitted and is awaiting admin's approval.</h3>
-</div>
+</div> <!-- success -->
 
 <h1>Write a review!</h1>
 
 <form action="/submit_review" method = "POST">
     <label for="username">Name:</label>
     <br>
+    <!-- username -->
     <input type="text" id = "username" name = "username" placeholder = "Your name" minlength = "1" maxlength="30" class = "username">
     <br><br>
-
+    <!-- fragrance selector -->
     <label for="fragrance">Choose a fragrance:</label>
     <br>
     <select name="fid" id="fid">
@@ -38,7 +39,7 @@
     </select>
     <br><br>
 
-
+    <!-- review text box -->
     <label for="review">Review:</label>
     <br>
     <textarea id="review" name="review" placeholder="Write your review here" maxlength="500" class="review_box"></textarea>
@@ -46,10 +47,6 @@
     <input type="submit" value = "Submit" class = "submit">
     <br><br>
 </form>
-
-
-
-
 
 
 {%endblock%}

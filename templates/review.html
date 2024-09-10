@@ -4,11 +4,14 @@
 <h1>Write a review!</h1>
 
 <form action="/submit_review" method = "POST">
+
+    <!-- username -->
     <label for="username">Name:</label>
     <br>
     <input type="text" id = "username" name = "username" placeholder = "Your name" minlength = "1" maxlength="30" class = "username">
     <br><br>
 
+    <!-- fragrance -->
     <label for="fragrance">Choose a fragrance:</label>
     <br>
     <select name="fid" id="fid">
@@ -30,7 +33,7 @@
     </select>
     <br><br>
 
-
+    <!-- review box -->
     <label for="review">Review:</label>
     <br>
     <textarea id="review" name = "review" placeholder = "Write your review here" maxlength = "500" class = "review_box"></textarea>
@@ -41,7 +44,7 @@
 
 
 
-
+<!-- user reviews -->
 <div class = "review_container">
     <h1>Reviews</h1>
 

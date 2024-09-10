@@ -3,31 +3,49 @@ import sqlite3
 
 app = Flask(__name__)
 
+
+# Funcitons
+
+# Fetch one function
+def fetch_one(query, parameter=()):
+    connection = sqlite3.connect('fragrance.db') 
+    cur = connection.cursor()
+    cur.execute(query, parameter)
+    result = cur.fetchone()
+    connection.close()
+    return result
+
+
+# Fetch all function
+def fetch_all(query, parameter=()):
+    connection = sqlite3.connect('fragrance.db')
+    cur = connection.cursor()
+    cur.execute(query, parameter)
+    results = cur.fetchall()
+    connection.close()
+    return results
+
+
 # Route for homepage
 @app.route("/")
 def home():
-    connection = sqlite3.connect('fragrance.db')  # connect to database
-    cur = connection.cursor()
-    cur.execute("SELECT brand_name FROM Designer;")
-    fragrance_brand = cur.fetchall()
-    connection.close()
+    query = "SELECT brand_name FROM Designer;"
+    fragrance_brand = fetch_all(query)
     return render_template("home.html", brands=fragrance_brand)
 
 
 # Route for EDP page
 @app.route("/EDP")
 def edp():
-    connection = sqlite3.connect('fragrance.db')  # connect to database
-    cur = connection.cursor()
-    cur.execute('''SELECT bottle_id, bottle_name FROM Fragrance
-                INNER JOIN Designer 
-                ON Fragrance.bottle_brand = Designer.brand_id
-                WHERE bottle_concentration = 'EDP';''')
-    fragrance_result = cur.fetchall()
-    cur.execute('''SELECT bottle_concentration 
-                FROM Fragrance WHERE bottle_concentration = 'EDP';''')
-    fragrance_concentration = cur.fetchone()
-    connection.close()
+    fragrance_query = '''SELECT bottle_id, bottle_name FROM Fragrance
+        INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
+        WHERE bottle_concentration = 'EDP';'''
+
+    concentration_query = '''SELECT bottle_concentration 
+        FROM Fragrance WHERE bottle_concentration = 'EDP';'''
+
+    fragrance_result = fetch_all(fragrance_query)
+    fragrance_concentration = fetch_one(concentration_query)
     return render_template("all_fragrances.html", fragrances=fragrance_result,
                            concentration=fragrance_concentration)
 
@@ -35,48 +53,38 @@ def edp():
 # Route for EDT page
 @app.route("/EDT")
 def edt():
-    connection = sqlite3.connect('fragrance.db')  # connect to database
-    cur = connection.cursor()
-    cur.execute('''SELECT bottle_id, bottle_name FROM Fragrance
-                INNER JOIN Designer 
-                ON Fragrance.bottle_brand = Designer.brand_id
-                WHERE bottle_concentration = 'EDT';''')
-    fragrance_result = cur.fetchall()
-    cur.execute('''SELECT bottle_concentration
-                FROM Fragrance WHERE bottle_concentration = 'EDT';''')
-    fragrance_concentration = cur.fetchone()
-    connection.close()
+    fragrance_query = '''SELECT bottle_id, bottle_name FROM Fragrance
+        INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
+        WHERE bottle_concentration = 'EDT';'''
+
+    concentration_query = '''SELECT bottle_concentration 
+        FROM Fragrance WHERE bottle_concentration = 'EDT';'''
+
+    fragrance_result = fetch_all(fragrance_query)
+    fragrance_concentration = fetch_one(concentration_query)
     return render_template("all_fragrances.html", fragrances=fragrance_result,
                            concentration=fragrance_concentration)
 
 
-# Route for bottle information
+# Route for individaul bottle information
 @app.route("/fragrance/<int:id>")
 def bottle(id):
-    connection = sqlite3.connect('fragrance.db')  # connect to database
-    cur = connection.cursor()
+    info_query = '''SELECT bottle_name, bottle_description, bottle_concentration,
+               bottle_longevity, bottle_size, bottle_price, bottle_photo
+        FROM Fragrance WHERE bottle_id = ?;'''
 
-    # bottle info
-    cur.execute('''SELECT bottle_name, bottle_description,
-                bottle_concentration, bottle_longevity,
-                bottle_size, bottle_price, bottle_photo
-                FROM Fragrance WHERE
-                bottle_id = ?;''', (id,))
-    fragrance_info = cur.fetchone()
+    brand_query = '''SELECT brand_name FROM Fragrance
+        INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
+        WHERE bottle_id = ?;'''
 
-    # bottle brand
-    cur.execute('''SELECT brand_name from Fragrance INNER JOIN Designer ON
-                Fragrance.bottle_brand = Designer.brand_id
-                WHERE bottle_id = ?;''', (id,))
-    fragrance_brand = cur.fetchone()
+    notes_query = '''SELECT bottle_name, note_name FROM Notebridge
+        INNER JOIN Note ON Notebridge.nid = Note.note_id
+        INNER JOIN Fragrance ON Notebridge.fid = Fragrance.bottle_id
+        WHERE bottle_id = ?;'''
 
-    # notes
-    cur.execute('''SELECT bottle_name, note_name FROM Notebridge INNER JOIN
-                Note ON NoteBridge.nid = Note.note_id INNER JOIN Fragrance
-                ON NoteBridge.fid = Fragrance.bottle_id WHERE bottle_id = ?''',
-                (id,))     
-    fragrance_note = cur.fetchall()
-    connection.close()
+    fragrance_info = fetch_one(info_query, (id,))
+    fragrance_brand = fetch_one(brand_query, (id,))
+    fragrance_note = fetch_all(notes_query, (id,))
     return render_template("bottle_info.html", notes=fragrance_note,
                            brand=fragrance_brand, info=fragrance_info)
 
@@ -84,19 +92,18 @@ def bottle(id):
 # Route for comparision page
 @app.route("/comparision")
 def comparision():
-    connection = sqlite3.connect('fragrance.db')  # connect to database
-    cur = connection.cursor()
-    cur.execute('''SELECT bottle_name, brand_name, bottle_longevity,
-                bottle_size, bottle_price, bottle_photo FROM Fragrance
-                INNER JOIN Designer ON Fragrance.bottle_brand =
-                Designer.brand_id WHERE bottle_concentration = 'EDT';''')
-    edt_result = cur.fetchall()
-    cur.execute('''SELECT bottle_name, brand_name, bottle_longevity,
-                bottle_size, bottle_price, bottle_photo FROM Fragrance
-                INNER JOIN Designer ON Fragrance.bottle_brand =
-                Designer.brand_id WHERE bottle_concentration = 'EDP';''')
-    edp_result = cur.fetchall()
-    connection.close()
+    edt_query = '''SELECT bottle_name, brand_name, bottle_longevity, bottle_size,
+        bottle_price, bottle_photo FROM Fragrance
+        INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
+        WHERE bottle_concentration = 'EDT';'''
+
+    edp_query = '''SELECT bottle_name, brand_name, bottle_longevity, bottle_size,
+        bottle_price, bottle_photo FROM Fragrance
+        INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
+        WHERE bottle_concentration = 'EDP';'''
+
+    edt_result = fetch_all(edt_query)
+    edp_result = fetch_all(edp_query)
     return render_template('comparision.html',
                            edt_comparision=edt_result,
                            edp_conparision=edp_result)
@@ -105,14 +112,10 @@ def comparision():
 # Form page
 @app.route("/form")
 def form():
-    connection = sqlite3.connect('fragrance.db')  # connect to database
-    cur = connection.cursor()
-    cur.execute('''SELECT review_username, bottle_name, review_content
+    review_query = '''SELECT review_username, bottle_name, review_content
                 FROM Fragrance INNER JOIN Form ON Fragrance.bottle_id =
-                Form.review_fid WHERE review_approval = 1;''')
-    # Selects approved reviews and displays on the page
-    fragrance_reviews = cur.fetchall()
-    connection.close()
+                Form.review_fid WHERE review_approval = 1;'''
+    fragrance_reviews = fetch_all(review_query)
     return render_template("review.html", reviews=fragrance_reviews)
 
 

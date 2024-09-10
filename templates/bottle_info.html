@@ -12,12 +12,12 @@
             <p><strong>Longevity: </strong>{{info[3]}}</p>
             <p><strong>Bottle size: </strong>{{info[4]}}</p>
             <p><strong>Price: </strong>{{info[5]}} NZD</p>
-        </div>
+        </div> <!-- fragrance_info_container -->
 
         <div class = "fragrance_img_container">
             <img src="{{ info[6] }}" alt="{{info[0]}} Image">
-        </div>
-    </div>
+        </div> <!-- fragrance_img_container -->
+    </div> <!-- bottle_info_container -->
     
 
     <br>
@@ -26,7 +26,6 @@
         {% for note in notes %}
             <li>{{ note[1] }}</li> <!-- Notes -->
         {% endfor %}
-
     </ul>
 
 

@@ -9,55 +9,38 @@
 
 <div class = "comparision_container">
     <div class = "edt_container">
-
-        
         <h2>EDT Fragrances</h2>
         <br>
         {% for edt in edt_comparision %} <!-- edt info for comparision -->
             <h3>{{ edt[0] }}</h3>
-
             <p><strong>Brand: </strong>{{ edt[1] }}</p>
-
             <p></p><strong>Longevity: </strong>{{ edt[2] }}</p>
-
             <p><strong>Bottle size: </strong>{{ edt[3] }}</p>
-
             <p><strong>Price: </strong>{{ edt[4] }} NZD</p> 
-
             <br>
             <hr>
             <br>
         {% endfor %}
     
-    </div>
+    </div> <!-- edt_container -->
 
 
-    
-    
-    
     
     <div class = "edp_container">
         <h2>EDP Fragrances</h2>
         <br>
         {% for edp in edp_conparision %} <!-- display all edp fragrances -->
-        
             <h3>{{ edp[0] }}</h3>
-        
             <p><strong>Brand: </strong>{{ edp[1] }}</p>
-
             <p><strong>Longevity: </strong>{{ edp[2] }}</p>
-
             <p><strong>Bottle size: </strong>{{ edp[3] }}</p>
-
             <p><strong>Price: </strong>{{ edp[4] }} NZD</p> 
-
             <br>
             <hr>
             <br>
         {% endfor %}
-    </div>
-    
-</div>
+    </div> <!-- edp_container -->
+</div> <!-- comparision_container -->
 
 
 {%endblock%}

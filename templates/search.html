@@ -3,10 +3,7 @@
     <h1>Top results:</h1>
     <br><br>
     
-
-
-
-
+    <!-- results from search -->
     {% for search_result in search_results %}
 
         <div class = "search_container">
@@ -14,24 +11,14 @@
                 <h3>{{ search_result[0] }}</h3>
                 <p>Brand: {{ search_result[1] }}</p>
                 <p>Concentration: {{ search_result[2] }}</p>
-            </div>
+            </div> <!-- search_result -->
             
                 <a href="http://127.0.0.1:5000/fragrance/{{ search_result[3] }}" class = "arrow">
-                    
                     <h1>➢</h1>
-                    
                 </a>
 
-        </div>
-        
+        </div> <!-- search_container -->
         <br><br>
-
     {% endfor %}
-
-
-
     
-
-    
-
 {%endblock%}
