@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, render_template_string
+from flask import Flask, render_template, request, redirect, render_template_string
 import sqlite3
 
 app = Flask(__name__)
-
 
 # Route for homepage
 @app.route("/")
@@ -75,7 +74,7 @@ def bottle(id):
     cur.execute('''SELECT bottle_name, note_name FROM Notebridge INNER JOIN
                 Note ON NoteBridge.nid = Note.note_id INNER JOIN Fragrance
                 ON NoteBridge.fid = Fragrance.bottle_id WHERE bottle_id = ?''',
-                (id,))        
+                (id,))     
     fragrance_note = cur.fetchall()
     connection.close()
     return render_template("bottle_info.html", notes=fragrance_note,
@@ -99,7 +98,7 @@ def comparision():
     edp_result = cur.fetchall()
     connection.close()
     return render_template('comparision.html',
-                           edt_comparision=edt_result, 
+                           edt_comparision=edt_result,
                            edp_conparision=edp_result)
 
 
@@ -127,7 +126,8 @@ def submit_review():
     if not username or not review:
         return render_template_string('''Error: Cannot have a null input for
                                       name or review. Please fill out the
-                                      form fully.<a href="http://127.0.0.1:5000/form">
+                                      form fully.<a href=
+                                      "http://127.0.0.1:5000/form">
                                       Go back to the form</a>''')
     # checks if username is longer than 30 characters
     elif len(username) > 30:
@@ -137,7 +137,7 @@ def submit_review():
                                       Go back to the form</a>''')
     # checks if review is longer than 40 characters
     elif len(review) > 500:
-        return render_template_string('''Error: Your review is too long. 
+        return render_template_string('''Error: Your review is too long.
                                       Please shorten it to 500 characters.
                                       <a href="{{ url_for('form') }}">
                                       Go back to the form</a>''')
