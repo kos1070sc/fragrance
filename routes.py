@@ -1,16 +1,17 @@
-from flask import Flask, render_template, request, redirect, render_template_string
+from flask import Flask, render_template, request, render_template_string
 import sqlite3
 
 app = Flask(__name__)
 
+# Functions
+# These functions uses parametres to prevent sql attacks
 
-# Funcitons
 
 # Fetch one function
 def fetch_one(query, parameter=()):
-    connection = sqlite3.connect('fragrance.db') 
+    connection = sqlite3.connect('fragrance.db')
     cur = connection.cursor()
-    cur.execute(query, parameter)
+    cur.execute(query, parameter)  # excutes that query that is passed on
     result = cur.fetchone()
     connection.close()
     return result
@@ -26,11 +27,12 @@ def fetch_all(query, parameter=()):
     return results
 
 
+# Routes
 # Route for homepage
 @app.route("/")
 def home():
     query = "SELECT brand_name FROM Designer;"
-    fragrance_brand = fetch_all(query)
+    fragrance_brand = fetch_all(query)  # Fetches all the brand names
     return render_template("home.html", brands=fragrance_brand)
 
 
@@ -41,7 +43,7 @@ def edp():
         INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
         WHERE bottle_concentration = 'EDP';'''
 
-    concentration_query = '''SELECT bottle_concentration 
+    concentration_query = '''SELECT bottle_concentration
         FROM Fragrance WHERE bottle_concentration = 'EDP';'''
 
     fragrance_result = fetch_all(fragrance_query)
@@ -57,7 +59,7 @@ def edt():
         INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
         WHERE bottle_concentration = 'EDT';'''
 
-    concentration_query = '''SELECT bottle_concentration 
+    concentration_query = '''SELECT bottle_concentration
         FROM Fragrance WHERE bottle_concentration = 'EDT';'''
 
     fragrance_result = fetch_all(fragrance_query)
@@ -69,13 +71,14 @@ def edt():
 # Route for individaul bottle information
 @app.route("/fragrance/<int:id>")
 def bottle(id):
-    info_query = '''SELECT bottle_name, bottle_description, bottle_concentration,
-               bottle_longevity, bottle_size, bottle_price, bottle_photo
-        FROM Fragrance WHERE bottle_id = ?;'''
+    info_query = '''SELECT bottle_name, bottle_description,
+        bottle_concentration, bottle_longevity, bottle_size,
+        bottle_price, bottle_photo FROM Fragrance WHERE
+        bottle_id = ?;'''
 
     brand_query = '''SELECT brand_name FROM Fragrance
-        INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
-        WHERE bottle_id = ?;'''
+        INNER JOIN Designer ON Fragrance.bottle_brand =
+        Designer.brand_id WHERE bottle_id = ?;'''
 
     notes_query = '''SELECT bottle_name, note_name FROM Notebridge
         INNER JOIN Note ON Notebridge.nid = Note.note_id
@@ -92,13 +95,13 @@ def bottle(id):
 # Route for comparision page
 @app.route("/comparision")
 def comparision():
-    edt_query = '''SELECT bottle_name, brand_name, bottle_longevity, bottle_size,
-        bottle_price, bottle_photo FROM Fragrance
+    edt_query = '''SELECT bottle_name, brand_name, bottle_longevity,
+        bottle_size, bottle_price, bottle_photo FROM Fragrance
         INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
         WHERE bottle_concentration = 'EDT';'''
 
-    edp_query = '''SELECT bottle_name, brand_name, bottle_longevity, bottle_size,
-        bottle_price, bottle_photo FROM Fragrance
+    edp_query = '''SELECT bottle_name, brand_name, bottle_longevity,
+        bottle_size, bottle_price, bottle_photo FROM Fragrance
         INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
         WHERE bottle_concentration = 'EDP';'''
 
@@ -113,8 +116,8 @@ def comparision():
 @app.route("/form")
 def form():
     review_query = '''SELECT review_username, bottle_name, review_content
-                FROM Fragrance INNER JOIN Form ON Fragrance.bottle_id =
-                Form.review_fid WHERE review_approval = 1;'''
+        FROM Fragrance INNER JOIN Form ON Fragrance.bottle_id = Form.review_fid
+        WHERE review_approval = 1;'''   # Displays approved reviews only
     fragrance_reviews = fetch_all(review_query)
     return render_template("review.html", reviews=fragrance_reviews)
 
@@ -125,36 +128,36 @@ def submit_review():
     username = request.form["username"]
     fid = request.form["fid"]
     review = request.form["review"]
-    # checks if username or review is null
+    # Checks if username or review is null
     if not username or not review:
         return render_template_string('''Error: Cannot have a null input for
                                       name or review. Please fill out the
                                       form fully.<a href=
                                       "http://127.0.0.1:5000/form">
                                       Go back to the form</a>''')
-    # checks if username is longer than 30 characters
+    # Checks if username is longer than 30 characters
     elif len(username) > 30:
         return render_template_string('''Error: Name too long. Please enter a
                                       name under 30 characters.
                                       <a href="http://127.0.0.1:5000/form">
                                       Go back to the form</a>''')
-    # checks if review is longer than 40 characters
+    # Checks if review is longer than 40 characters
     elif len(review) > 500:
         return render_template_string('''Error: Your review is too long.
                                       Please shorten it to 500 characters.
                                       <a href="{{ url_for('form') }}">
                                       Go back to the form</a>''')
     else:
-        connection = sqlite3.connect("fragrance.db")  # connect to database
+        connection = sqlite3.connect("fragrance.db")
         cur = connection.cursor()
         cur.execute('''INSERT INTO Form (review_username, review_fid,
                     review_content) VALUES (?,?,?)''',
                     (username, fid, review,))
-        # insert responese into the database
+        # insert review into the database
         connection.commit()
         connection.close()
         return render_template("review_submit.html")
-        # redirects the user back to the form page
+        # Displays an success message on review_submit.html
 
 
 # Search page
@@ -162,7 +165,7 @@ def submit_review():
 def search():
     search = request.form["search_bar"].lower()
     # this makes the search case insensitive
-    connection = sqlite3.connect("fragrance.db")  # connect to database
+    connection = sqlite3.connect("fragrance.db")
     cur = connection.cursor()
     cur.execute('''SELECT bottle_name, brand_name, bottle_concentration,
                 bottle_id FROM Fragrance INNER JOIN Designer ON
@@ -173,16 +176,17 @@ def search():
                 # the user can search for the name,
                 # brand or concentration of the fragrance
                 ('%' + search + '%', '%' + search + '%', '%' + search + '%',))
-    # return result even if there is only a partial input
+    # return result even if there is only a partial input with LIKE operator
     search_results = cur.fetchall()
     connection.close()
     if not search_results:  # checks if the result are fasly values
         return render_template("no_results.html")
+    # displays error message if no results
     else:
         return render_template("search.html", search_results=search_results)
 
 
-# 404 error page
+# 404 page
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
@@ -202,5 +206,6 @@ def reverse_triangle(size):
         print('*' * i)
 
 
+# Debugger
 if __name__ == "__main__":
     app.run(debug=True)

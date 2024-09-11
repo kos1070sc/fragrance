@@ -1,7 +1,11 @@
+
+/* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
-/* layout.html */
 
+
+
+/* layout.html */
 body{
    margin:0;
    padding: -5%;
@@ -18,10 +22,6 @@ body{
     justify-content: center;  /* align the items in the center horizontally */
     height: 80px;
 }
-
-
-/* // <uniquifier>: Use a unique and descriptive class name
-// <weight>: Use a value from 400 to 900*/
 
 .navbar a{
     color:cyan; 
@@ -60,7 +60,6 @@ body{
     to {opacity: 1;}
   }
 
-
 .search_bar {
     display: flex;
     align-items: center;
@@ -77,7 +76,6 @@ body{
   padding-right: 10px
 }
 
-
 .search_bar button{
   height: 35px;
   width: 90px;
@@ -92,7 +90,6 @@ body{
 .content{
     padding-left: calc(25% - 20px);
     padding-right: calc(25% - 20px);
-
 }
 
 .footer{
@@ -121,12 +118,7 @@ body{
 
 
 
-
-
-
 /* home.hmtl */
-
-
 .introduction_container {
     display: flex;
     align-items: center;
@@ -153,10 +145,7 @@ body{
   width: 100%;
   border-radius: 5px;
   box-shadow: 5px 5px rgb(46, 43, 43);
-  
 }
-
-
 
 .featured_brand_container{
   padding: 30px;
@@ -167,21 +156,13 @@ body{
   border-radius: 10px;
 }
 
-
-
 .featured_brand_container h4{
   font-size: 30px;
 }
 
 
 
-
-
-
-
-
 /* bottle_info.html*/
-
 .bottle_info_container{
   display: flex;
   align-items: center;
@@ -203,10 +184,6 @@ body{
 
 
 
-
-
-
-
 /* comparision.html */
 .comparision_container{
   display: flex;
@@ -221,6 +198,7 @@ body{
   flex: 2;
   padding: 50px;
 }
+
 
 
 /* search.html */
@@ -266,10 +244,6 @@ body{
 
 
 
-
-
-
-
 /* no_result.html */
 .error{
   border-width: 2px;
@@ -291,7 +265,6 @@ body{
 
 
 /* all_fragrances.html */
-
 .fragrance_container{
   border-width: 2px;
   border-style: solid;
@@ -313,9 +286,8 @@ body{
 }
 
 
+
 /* review.html */
-
-
 .reviews{
   border-width: 2px;
   border-style: solid;
@@ -404,7 +376,7 @@ body{
   border-radius: 10px;
   background-color: rgb(76, 255, 60);
   opacity: 0;
-  /* Set the initial opacity to 0 to make the title fade in*/
+  /* Set the initial opacity to 0 to make the it fade in*/
   animation: fadein ease-in forwards;
   animation-duration: 2s;
 }
