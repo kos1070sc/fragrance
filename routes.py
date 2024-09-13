@@ -3,28 +3,19 @@ import sqlite3
 
 app = Flask(__name__)
 
-# Functions
-# These functions uses parametres to prevent sql attacks
+# Fetch funtion
 
 
-# Fetch one function
-def fetch_one(query, parameter=()):
+def fetch(query, function=0, parameter=()):
     connection = sqlite3.connect('fragrance.db')
     cur = connection.cursor()
     cur.execute(query, parameter)  # excutes that query that is passed on
-    result = cur.fetchone()
+    if function == 1:
+        result = cur.fetchone()
+    else:
+        result = cur.fetchall()
     connection.close()
     return result
-
-
-# Fetch all function
-def fetch_all(query, parameter=()):
-    connection = sqlite3.connect('fragrance.db')
-    cur = connection.cursor()
-    cur.execute(query, parameter)
-    results = cur.fetchall()
-    connection.close()
-    return results
 
 
 # Routes
@@ -32,7 +23,7 @@ def fetch_all(query, parameter=()):
 @app.route("/")
 def home():
     query = "SELECT brand_name FROM Designer;"
-    fragrance_brand = fetch_all(query)  # Fetches all the brand names
+    fragrance_brand = fetch(query)  # Fetches all the brand names
     return render_template("home.html", brands=fragrance_brand)
 
 
@@ -46,8 +37,8 @@ def edp():
     concentration_query = '''SELECT bottle_concentration
         FROM Fragrance WHERE bottle_concentration = 'EDP';'''
 
-    fragrance_result = fetch_all(fragrance_query)
-    fragrance_concentration = fetch_one(concentration_query)
+    fragrance_result = fetch(fragrance_query)
+    fragrance_concentration = fetch(concentration_query, function=1)
     return render_template("all_fragrances.html", fragrances=fragrance_result,
                            concentration=fragrance_concentration)
 
@@ -62,8 +53,8 @@ def edt():
     concentration_query = '''SELECT bottle_concentration
         FROM Fragrance WHERE bottle_concentration = 'EDT';'''
 
-    fragrance_result = fetch_all(fragrance_query)
-    fragrance_concentration = fetch_one(concentration_query)
+    fragrance_result = fetch(fragrance_query)
+    fragrance_concentration = fetch(concentration_query, function=1)
     return render_template("all_fragrances.html", fragrances=fragrance_result,
                            concentration=fragrance_concentration)
 
@@ -71,25 +62,30 @@ def edt():
 # Route for individaul bottle information
 @app.route("/fragrance/<int:id>")
 def bottle(id):
-    info_query = '''SELECT bottle_name, bottle_description,
-        bottle_concentration, bottle_longevity, bottle_size,
-        bottle_price, bottle_photo FROM Fragrance WHERE
-        bottle_id = ?;'''
+    if id <= 0:
+        return render_template("404.html")
+    elif id >= 13:
+        return render_template("404.html")
+    else:
+        info_query = '''SELECT bottle_name, bottle_description,
+            bottle_concentration, bottle_longevity, bottle_size,
+            bottle_price, bottle_photo FROM Fragrance WHERE
+            bottle_id = ?;'''
 
-    brand_query = '''SELECT brand_name FROM Fragrance
-        INNER JOIN Designer ON Fragrance.bottle_brand =
-        Designer.brand_id WHERE bottle_id = ?;'''
+        brand_query = '''SELECT brand_name FROM Fragrance
+            INNER JOIN Designer ON Fragrance.bottle_brand =
+            Designer.brand_id WHERE bottle_id = ?;'''
 
-    notes_query = '''SELECT bottle_name, note_name FROM Notebridge
-        INNER JOIN Note ON Notebridge.nid = Note.note_id
-        INNER JOIN Fragrance ON Notebridge.fid = Fragrance.bottle_id
-        WHERE bottle_id = ?;'''
+        notes_query = '''SELECT bottle_name, note_name FROM Notebridge
+            INNER JOIN Note ON Notebridge.nid = Note.note_id
+            INNER JOIN Fragrance ON Notebridge.fid = Fragrance.bottle_id
+            WHERE bottle_id = ?;'''
 
-    fragrance_info = fetch_one(info_query, (id,))
-    fragrance_brand = fetch_one(brand_query, (id,))
-    fragrance_note = fetch_all(notes_query, (id,))
-    return render_template("bottle_info.html", notes=fragrance_note,
-                           brand=fragrance_brand, info=fragrance_info)
+        fragrance_info = fetch(info_query, function=1, parameter=(id,))
+        fragrance_brand = fetch(brand_query, function=1, parameter=(id,))
+        fragrance_note = fetch(notes_query, parameter=(id,))
+        return render_template("bottle_info.html", notes=fragrance_note,
+                               brand=fragrance_brand, info=fragrance_info)
 
 
 # Route for comparision page
@@ -105,8 +101,8 @@ def comparision():
         INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
         WHERE bottle_concentration = 'EDP';'''
 
-    edt_result = fetch_all(edt_query)
-    edp_result = fetch_all(edp_query)
+    edt_result = fetch(edt_query)
+    edp_result = fetch(edp_query)
     return render_template('comparision.html',
                            edt_comparision=edt_result,
                            edp_conparision=edp_result)
@@ -118,7 +114,7 @@ def form():
     review_query = '''SELECT review_username, bottle_name, review_content
         FROM Fragrance INNER JOIN Form ON Fragrance.bottle_id = Form.review_fid
         WHERE review_approval = 1;'''   # Displays approved reviews only
-    fragrance_reviews = fetch_all(review_query)
+    fragrance_reviews = fetch(review_query)
     return render_template("review.html", reviews=fragrance_reviews)
 
 
