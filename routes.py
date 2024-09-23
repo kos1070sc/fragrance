@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, render_template_string
 import sqlite3
 
+MAX_NAME_CHARACTER = 30
+MAX_REVIEW_CHARACTER = 500
+MAX_FRAGRANCE_ID = 12
+
 app = Flask(__name__)
 
 # Fetch funtion
@@ -35,6 +39,7 @@ def home():
 def edp():
     # This query selects all the relevant general info for edp fragrance
     # It uses joins to connect the fragrance and designer tables together
+    # This is to show the fragrance and their corrosponding brands
     fragrance_query = '''SELECT bottle_id, bottle_name FROM Fragrance
         INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
         WHERE bottle_concentration = 'EDP';'''
@@ -70,9 +75,9 @@ def bottle(id):
     # checks if less than 0 or greater than 12
     # displays the 404 page if it doesn't meet conditions
     if id <= 0:
-        return render_template("404.html")
-    elif id >= 13:
-        return render_template("404.html")
+        return page_not_found(404)
+    elif id > MAX_FRAGRANCE_ID:
+        return page_not_found(404)
     else:
         # This query selects in depth details about the particular fragrance
         info_query = '''SELECT bottle_name, bottle_description,
@@ -146,13 +151,13 @@ def submit_review():
                                       "http://127.0.0.1:5000/form">
                                       Go back to the form</a>''')
     # Checks if username is longer than 30 characters
-    elif len(username) > 30:
+    elif len(username) > MAX_NAME_CHARACTER:
         return render_template_string('''Error: Name too long. Please enter a
                                       name under 30 characters.
                                       <a href="http://127.0.0.1:5000/form">
                                       Go back to the form</a>''')
     # Checks if review is longer than 40 characters
-    elif len(review) > 500:
+    elif len(review) > MAX_REVIEW_CHARACTER:
         return render_template_string('''Error: Your review is too long.
                                       Please shorten it to 500 characters.
                                       <a href="{{ url_for('form') }}">

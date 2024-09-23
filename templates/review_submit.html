@@ -8,45 +8,10 @@
     <h2>Success!</h2>
     <h3>Your review has been submitted and is awaiting admin's approval.</h3>
 </div> <!-- success -->
-
-<h1>Write a review!</h1>
-
-<form action="/submit_review" method = "POST">
-    <label for="username">Name:</label>
-    <br>
-    <!-- username -->
-    <input type="text" id = "username" name = "username" placeholder = "Your name" minlength = "1" maxlength="30" class = "username">
-    <br><br>
-    <!-- fragrance selector -->
-    <label for="fragrance">Choose a fragrance:</label>
-    <br>
-    <select name="fid" id="fid">
-        
-        <option value="1">Le Male</option>
-        <option value="2">Le Male Le Parfum</option>
-        <option value="3">Eros Eau de Toilette </option>
-        <option value="4">Eros Eau de Parfum</option>
-        <option value="5">Bleu de Chanel Eau de Toilette</option>
-        <option value="6">Bleu de Chanel Eau de Parfum</option>
-        <option value="7">Acqua di Giò</option>
-        <option value="8">Acqua di Giò Profumo</option>
-        <option value="9">Sauvage Eau de Toillette</option>
-        <option value="10">Sauvage Eau de Parfum</option>
-        <option value="11">Light Blue Pour Homme</option>
-        <option value="12">Light Blue Intense</option>
-
-
-    </select>
-    <br><br>
-
-    <!-- review text box -->
-    <label for="review">Review:</label>
-    <br>
-    <textarea id="review" name="review" placeholder="Write your review here" maxlength="500" class="review_box"></textarea>
-    <br><br>
-    <input type="submit" value = "Submit" class = "submit">
-    <br><br>
-</form>
-
+<br><br>
+<div class="button-container">
+    <a href="http://127.0.0.1:5000/" class="button">Go to Home  ></a>
+</div> <!-- button_container -->
+<br><br> 
 
 {%endblock%}

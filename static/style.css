@@ -192,11 +192,12 @@ body{
 
 .edt_container{
   flex: 2;
+  padding-left: 20px;
 }
 
 .edp_container{
   flex: 2;
-  padding: 50px;
+  padding-left: 20px;
 }
 
 
