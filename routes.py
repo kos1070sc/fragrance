@@ -1,15 +1,16 @@
 from flask import Flask, render_template, request, render_template_string
 import sqlite3
 
+# Constants
 MAX_NAME_CHARACTER = 30
 MAX_REVIEW_CHARACTER = 500
 MAX_FRAGRANCE_ID = 12
 
 app = Flask(__name__)
 
+
 # Fetch funtion
-
-
+# Function parametre determines if it is a fetchone or fetchall
 def fetch(query, function=0, parameter=()):
     connection = sqlite3.connect('fragrance.db')
     cur = connection.cursor()
@@ -27,7 +28,8 @@ def fetch(query, function=0, parameter=()):
 # Route for homepage
 @app.route("/")
 def home():
-    # This query selects are brand names
+    # This query selects the brand names
+    # To display all featured brands in homepage
     query = "SELECT brand_name FROM Designer;"
     # Fetches all the brand names
     fragrance_brand = fetch(query)
@@ -46,23 +48,6 @@ def edp():
     # This query gets the edp concentration
     concentration_query = '''SELECT bottle_concentration
         FROM Fragrance WHERE bottle_concentration = 'EDP';'''
-    fragrance_result = fetch(fragrance_query)
-    fragrance_concentration = fetch(concentration_query, function=1)
-    return render_template("all_fragrances.html", fragrances=fragrance_result,
-                           concentration=fragrance_concentration)
-
-
-# Route for EDT page
-@app.route("/EDT")
-def edt():
-    # This query selects all the relevant general info for edt fragrance
-    # It uses joins to connect the fragrance and designer tables together
-    fragrance_query = '''SELECT bottle_id, bottle_name FROM Fragrance
-        INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
-        WHERE bottle_concentration = 'EDT';'''
-    # This query gets the edt concentration
-    concentration_query = '''SELECT bottle_concentration
-        FROM Fragrance WHERE bottle_concentration = 'EDT';'''
     fragrance_result = fetch(fragrance_query)
     fragrance_concentration = fetch(concentration_query, function=1)
     return render_template("all_fragrances.html", fragrances=fragrance_result,
@@ -201,6 +186,24 @@ def search():
     else:
         # displays search results
         return render_template("search.html", search_results=search_results)
+
+
+# Route for EDT page
+@app.route("/EDT")
+def edt():
+    # This query selects all the relevant general info for edt fragrance
+    # It uses joins to connect the fragrance and designer tables together
+    # This is to show the fragrance and their corrosponding brands
+    fragrance_query = '''SELECT bottle_id, bottle_name FROM Fragrance
+        INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
+        WHERE bottle_concentration = 'EDT';'''
+    # This query gets the edt concentration
+    concentration_query = '''SELECT bottle_concentration
+        FROM Fragrance WHERE bottle_concentration = 'EDT';'''
+    fragrance_result = fetch(fragrance_query)
+    fragrance_concentration = fetch(concentration_query, function=1)
+    return render_template("all_fragrances.html", fragrances=fragrance_result,
+                           concentration=fragrance_concentration)
 
 
 # 404 page
