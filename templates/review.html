@@ -29,7 +29,6 @@
         <option value="11">Light Blue Pour Homme</option>
         <option value="12">Light Blue Intense</option>
 
-
     </select>
     <br><br>
 
@@ -42,31 +41,25 @@
     <br><br>
 </form>
 
-
-
 <!-- user reviews -->
 <div class = "review_container">
     <h1>Reviews</h1>
-
         {% for review in reviews %}
             <div class = "reviews">
                 <div><p class = "review_fragrance"><strong>Fragrance: </strong>{{ review[1] }}</p>
                     <hr>
-                </div>
-                
+                </div> <!-- review_fragrance -->
                 <p>{{ review[2] }}</p>
-
                 <div class = "profile_container">
                     <div class = "picture"><img src="static\images\profile.jpg" alt="profile picture"></div>
                     <div class = "name"><p><strong>-{{ review[0] }}</strong></p></div>
-                </div>
+                </div> <!-- profile_container -->
                 <br>
-                
-            </div>
-    <br><br>
-            
+            </div> <!-- reviews -->
+            <br><br>
         {% endfor %}
-</div>
+</div> <!-- review_container -->
+
 
 
 

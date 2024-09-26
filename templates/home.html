@@ -6,15 +6,10 @@
 <div class = "hero_container">
     <img src="static/images/hero_img.jpg" alt="Hero Image">
 </div> <!-- hero_container -->
-
-
 <div class = "introduction_container">
-
     <div class = "introduction_image">
         <img src="static/images/intro_img.png" alt="Introduction Image">
     </div> <!-- introduction_container -->
-
-
     <div class = "introduction_text">
         <h2>
             Comparing EDT and EDP Fragrances
@@ -36,15 +31,10 @@
             embark on a journey of olfactory exploration like never before!
         </p>
     </div> <!-- introduction_text -->
-
 </div> <!-- introduction-container -->
-
-
 
 <h2>Feature Brands</h2>
 <hr>
-
-
 {% for brand in brands %}
 <div class = "featured_brand_container">
     <h4>{{ brand[0] }}</h4>
@@ -52,6 +42,5 @@
 <br><br>
 
 {% endfor %}
-
 {%endblock%}
 

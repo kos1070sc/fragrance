@@ -185,19 +185,57 @@ body{
 
 
 /* comparision.html */
-.comparision_container{
+.page_title {
+  text-align: center;
+}
+
+.comparision_container hr {
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}
+
+.comparision_container {
   display: flex;
-  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
 }
 
 .edt_container{
   flex: 2;
-  padding-left: 20px;
+  padding: 20px;
+  background-color:grey;
+  border-radius: 5px;
+  margin: 0 10px;
+
+}
+.edp_container {
+  flex: 2;
+  padding: 20px;
+  background-color:grey;
+  border-radius: 5px;
+  margin: 0 10px;
 }
 
-.edp_container{
-  flex: 2;
-  padding-left: 20px;
+.individual_comparision {
+  border-width: 1px;
+  border-style: solid;
+  border-color: gold;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+  color: black;
+}
+
+.edt_container h2{
+  color: cyan;
+}
+
+
+.edp_container h2{
+  color: cyan;
 }
 
 

@@ -12,13 +12,10 @@
                 <p>Brand: {{ search_result[1] }}</p>
                 <p>Concentration: {{ search_result[2] }}</p>
             </div> <!-- search_result -->
-            
                 <a href="http://127.0.0.1:5000/fragrance/{{ search_result[3] }}" class = "arrow">
                     <h1>➢</h1>
                 </a>
-
         </div> <!-- search_container -->
         <br><br>
     {% endfor %}
-    
 {%endblock%}

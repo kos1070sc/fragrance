@@ -93,12 +93,11 @@ def bottle(id):
 # Route for comparision page
 @app.route("/comparision")
 def comparision():
-    # These 2 queries selects relevant info to compare the fragrances
+    # These 2 queries selects relevant info to compare the frgrances
     edt_query = '''SELECT bottle_name, brand_name, bottle_longevity,
         bottle_size, bottle_price, bottle_photo FROM Fragrance
         INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
         WHERE bottle_concentration = 'EDT';'''
-
     edp_query = '''SELECT bottle_name, brand_name, bottle_longevity,
         bottle_size, bottle_price, bottle_photo FROM Fragrance
         INNER JOIN Designer ON Fragrance.bottle_brand = Designer.brand_id
@@ -151,41 +150,19 @@ def submit_review():
         connection = sqlite3.connect("fragrance.db")
         cur = connection.cursor()
         # This query inserts review into the database
+        # The table is expected to have columns: review_username,
+        # review_fid, and review_content
         cur.execute('''INSERT INTO Form (review_username, review_fid,
                     review_content) VALUES (?,?,?)''',
+                    # The values that is inserted are provided as a tuple
+                    # username is name of the user
+                    # fid is the fragrance id
+                    # review is the concent of the review
                     (username, fid, review,))
         connection.commit()
         connection.close()
         # Displays an success message on review_submit.html
         return render_template("review_submit.html")
-
-
-# Search route
-@app.route("/search", methods=["POST"])
-def search():
-    # make the search case insensitive
-    search = request.form["search_bar"].lower()
-    connection = sqlite3.connect("fragrance.db")
-    cur = connection.cursor()
-    # the user can search for the name, brand or concentration of the fragrance
-    cur.execute('''SELECT bottle_name, brand_name, bottle_concentration,
-                bottle_id FROM Fragrance INNER JOIN Designer ON
-                Fragrance.bottle_brand = Designer.brand_id WHERE
-                LOWER(bottle_name) LIKE ?
-                OR LOWER(bottle_concentration) LIKE ?
-                OR LOWER(brand_name) LIKE ?;''',
-                # return result even if there is only a partial input with
-                # LIKE operator
-                ('%' + search + '%', '%' + search + '%', '%' + search + '%',))
-    search_results = cur.fetchall()
-    connection.close()
-    # checks if the result are fasly values
-    if not search_results:
-        # displays error message if no results
-        return render_template("no_results.html")
-    else:
-        # displays search results
-        return render_template("search.html", search_results=search_results)
 
 
 # Route for EDT page
@@ -204,6 +181,39 @@ def edt():
     fragrance_concentration = fetch(concentration_query, function=1)
     return render_template("all_fragrances.html", fragrances=fragrance_result,
                            concentration=fragrance_concentration)
+
+
+# Search route
+@app.route("/search", methods=["POST"])
+def search():
+    # Retrive the search term from the user and converts it to lowercase
+    # This makes the search case insensitive
+    search = request.form["search_bar"].lower()
+    connection = sqlite3.connect("fragrance.db")
+    cur = connection.cursor()
+    # The SQL query allows user to search for fragrances by name,
+    # brand or concentration
+    # The LIKE operator is used for partial matches
+    # The query joins the Fragrance and Designer tables togther
+    cur.execute('''SELECT bottle_name, brand_name, bottle_concentration,
+                bottle_id FROM Fragrance INNER JOIN Designer ON
+                Fragrance.bottle_brand = Designer.brand_id WHERE
+                LOWER(bottle_name) LIKE ?
+                OR LOWER(bottle_concentration) LIKE ?
+                OR LOWER(brand_name) LIKE ?;''',
+                # The % signs are wildcards that allow for matches that contain
+                # the search term anywhere in the string
+                # For example, a search of 'male' will match with 'Le Male'
+                ('%' + search + '%', '%' + search + '%', '%' + search + '%',))
+    search_results = cur.fetchall()
+    connection.close()
+    # checks if the result are fasly values
+    if not search_results:
+        # displays error message if no results
+        return render_template("no_results.html")
+    else:
+        # displays search results
+        return render_template("search.html", search_results=search_results)
 
 
 # 404 page
